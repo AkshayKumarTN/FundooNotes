@@ -60,6 +60,30 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("api/ForgotPassword")]
+        public IActionResult ForgotPassword(string email)
+        {
+            try
+            {
+                bool result = this.manager.ForgotPassword(email);
+                if (result == true)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Please check the Mail!" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Invalid Email!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+
+        }
+
     }
 
 }

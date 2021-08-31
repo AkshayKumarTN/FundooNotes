@@ -1,10 +1,13 @@
-﻿using FundooNotes.Models;
+﻿using Experimental.System.Messaging;
+using FundooNotes.Models;
 using FundooNotes.Repository.Interface;
 using Models;
 using Repository.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 
@@ -53,7 +56,7 @@ namespace FundooNotes.Repository.Repository
             }
         }
 
-        // this function Checks for Login....
+        // This function Checks for Login....
         public bool Login(LoginModel userLoginData)
         {
             try
@@ -71,5 +74,72 @@ namespace FundooNotes.Repository.Repository
                 throw new ArgumentNullException(ex.Message);
             }
         }
+
+        // This function Sends Mail To UserEmail with a Link to Reset Password....
+        public bool ForgotPassword(string email)
+        {
+            try
+            {
+                var userCheck = this.userContext.Users.Where(x => x.Email == email).FirstOrDefault();
+                if (userCheck != null)
+                {
+                    SendMessage();
+                    var messageBody = receiverMessage();
+                    using (MailMessage mailMessage = new MailMessage("tnak369@gmail.com", email))
+                    {
+                        mailMessage.Subject = "Link to reset Password";
+                        mailMessage.Body = messageBody;
+                        mailMessage.IsBodyHtml = true;
+                        SmtpClient Smtp = new SmtpClient();
+                        Smtp.Host = "smtp.gmail.com";
+                        Smtp.EnableSsl = true;
+                        Smtp.UseDefaultCredentials = false;
+                        Smtp.Credentials = new NetworkCredential("tnak369@gmail.com", "Password");
+                        Smtp.Port = 587;
+                        Smtp.Send(mailMessage);
+                    }
+                    return true;
+
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
+        }
+
+        // This function Sends Message into MessageQueue....
+        public static void SendMessage()
+        {
+            var url = "Click on following link to reset your credentials for Fundoonotes App: https://localhost:44381/api/ResetPassword";
+            MessageQueue msmqQueue = new MessageQueue();
+            if (MessageQueue.Exists(@".\Private$\MyQueue"))
+            {
+                msmqQueue = new MessageQueue(@".\Private$\MyQueue");
+            }
+            else
+            {
+                msmqQueue = MessageQueue.Create(@".\Private$\MyQueue");
+            }
+            Message message = new Message();
+            message.Formatter = new BinaryMessageFormatter();
+            message.Body = url;
+            msmqQueue.Label = "url link";
+            msmqQueue.Send(message);
+        }
+
+        // This function Receives And Returns Message From MessageQueue....
+        public static string receiverMessage()
+        {
+            MessageQueue receiver = new MessageQueue(@".\Private$\MyQueue");
+            var receiving = receiver.Receive();
+            receiving.Formatter = new BinaryMessageFormatter();
+            string linkToBeSend = receiving.Body.ToString();
+            return linkToBeSend;
+        }
+
     }
 }
