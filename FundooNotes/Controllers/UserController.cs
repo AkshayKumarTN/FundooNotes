@@ -84,7 +84,7 @@ namespace FundooNotes.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPut]
         [Route("api/ResetPassword")]
         public IActionResult ResetPassword([FromBody] ResetPasswordModel resetPasswordData)
         {
