@@ -13,5 +13,6 @@ namespace FundooNotes.Repository.Interface
 
         public bool Login(LoginModel userLoginData);
         public bool ForgotPassword(string email);
+        bool ResetPassword(ResetPasswordModel resetPasswordData);
     }
 }

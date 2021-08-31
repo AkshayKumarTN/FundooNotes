@@ -1,6 +1,7 @@
 ﻿using Experimental.System.Messaging;
 using FundooNotes.Models;
 using FundooNotes.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Context;
 using System;
@@ -139,6 +140,31 @@ namespace FundooNotes.Repository.Repository
             receiving.Formatter = new BinaryMessageFormatter();
             string linkToBeSend = receiving.Body.ToString();
             return linkToBeSend;
+        }
+
+        // This function to Reset Password in the Database.......
+        // Reference : https://www.learnentityframeworkcore.com/dbcontext/modifying-data.....
+        public bool ResetPassword(ResetPasswordModel resetPasswordData)
+        {
+            try
+            {
+                string encodedPassword = EncodePasswordToBase64(resetPasswordData.NewPassword);
+                var userPassword = this.userContext.Users.Where(x => x.Email == resetPasswordData.Email).FirstOrDefault();
+                if (userPassword != null)
+                {
+                    userPassword.Password = encodedPassword;
+                    userContext.Entry(userPassword).State = EntityState.Modified;
+                    userContext.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException(ex.Message);
+            }
         }
 
     }

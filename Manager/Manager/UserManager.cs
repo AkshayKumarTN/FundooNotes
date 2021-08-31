@@ -55,5 +55,17 @@ namespace FundooNotes.Manager
             }
         }
 
+        public bool ResetPassword(ResetPasswordModel resetPasswordData)
+        {
+            try
+            {
+                return this.repository.ResetPassword(resetPasswordData);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
