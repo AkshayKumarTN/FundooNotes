@@ -51,5 +51,20 @@ namespace FundooNotes.Controllers
                 return this.BadRequest();
             }
         }
+
+        [HttpPut]
+        [Route("api/UpdateNote")]
+        public IActionResult UpdateEmployeeDetails([FromBody] NotesModel note)
+        {
+            var result = this.notes.UpdateNote(note);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Note updated Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Error While updating note" });
+            }
+        }
     }
 }

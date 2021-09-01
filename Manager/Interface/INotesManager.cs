@@ -5,5 +5,6 @@
     {
         public string AddNewNote(NotesModel note);
         public string RemoveNote(int id);
+        public string UpdateNote(NotesModel note);
     }
 }

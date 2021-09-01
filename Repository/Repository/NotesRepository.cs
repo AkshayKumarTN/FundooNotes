@@ -2,7 +2,8 @@
 {
     using System;
     using FundooNotes.Repository.Context;
-    using FundooNotes.Repository.Interface;    
+    using FundooNotes.Repository.Interface;
+    using Microsoft.EntityFrameworkCore;
 
     public class NotesRepository : INotesRepository
     {
@@ -35,6 +36,17 @@
                 throw e;
             }
 
+        }
+
+        public string UpdateNote(NotesModel note)
+        {
+            if (note.NotesId != 0)
+            {
+                userContext.Entry(note).State = EntityState.Modified;
+            }
+            this.userContext.SaveChanges();
+            string message = "SUCCESS";
+            return message;
         }
     }
 }
