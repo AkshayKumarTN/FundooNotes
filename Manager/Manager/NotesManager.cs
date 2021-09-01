@@ -18,5 +18,11 @@
             string message = this.notes.AddNewNote(note);
             return message;
         }
+
+        public string RemoveNote(int id)
+        {
+            string note = this.notes.RemoveNote(id);
+            return note;
+        }
     }
 }

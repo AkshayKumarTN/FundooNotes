@@ -1,7 +1,9 @@
 ﻿namespace FundooNotes.Repository.Repository
 {
+    using System;
     using FundooNotes.Repository.Context;
-    using FundooNotes.Repository.Interface;
+    using FundooNotes.Repository.Interface;    
+
     public class NotesRepository : INotesRepository
     {
         private readonly UserContext userContext;
@@ -17,6 +19,22 @@
             this.userContext.SaveChanges();
             string message = "SUCCESS";
             return message;
+        }
+
+        public string RemoveNote(int id)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Find(id);
+                this.userContext.FundooNotes.Remove(note);
+                this.userContext.SaveChangesAsync();
+                return "Note Deleted Successfully"; ;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

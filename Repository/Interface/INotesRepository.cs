@@ -4,5 +4,6 @@
     public interface INotesRepository
     {
         public string AddNewNote(NotesModel note);
+        public string RemoveNote(int id);
     }
 }

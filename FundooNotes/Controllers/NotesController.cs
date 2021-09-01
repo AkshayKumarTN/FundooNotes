@@ -35,5 +35,21 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = false, Message = "Failed to Add New Note to Database" });
             }
         }
+
+
+        [HttpDelete]
+        [Route("api/DeleteNote")]
+        public IActionResult RemoveEmployeeById(int id)
+        {
+            var result = this.notes.RemoveNote(id);
+            if (result.Equals("Note Deleted Successfully"))
+            {
+                return this.Ok(result);
+            }
+            else
+            {
+                return this.BadRequest();
+            }
+        }
     }
 }
