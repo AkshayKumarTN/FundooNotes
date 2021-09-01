@@ -61,40 +61,26 @@ namespace FundooNotes.Repository.Repository
         }
 
         /// <summary>
-        /// This function Sends Message into MessageQueue.......
-        /// </summary>
-        public static void SendMessage()
-        {
-            var url = "Click on following link to reset your credentials for Fundoonotes App: Link";
-            MessageQueue msmqQueue = new MessageQueue();
-            if (MessageQueue.Exists(@".\Private$\MyQueue"))
-            {
-                msmqQueue = new MessageQueue(@".\Private$\MyQueue");
-            }
-            else
-            {
-                msmqQueue = MessageQueue.Create(@".\Private$\MyQueue");
-            }
-
-            Message message = new Message();
-            message.Formatter = new BinaryMessageFormatter();
-            message.Body = url;
-            msmqQueue.Label = "url link";
-            msmqQueue.Send(message);
-        }
-
-        /// <summary>
         /// This function Receives And Returns Message From MessageQueue
         /// </summary>
         /// <returns>returns String</returns>
-        public static string ReceiverMessage()
+        public static bool SendMail(string email, string messageBody)
         {
-            MessageQueue receiver = new MessageQueue(@".\Private$\MyQueue");
-            var receiving = receiver.Receive();
-            receiving.Formatter = new BinaryMessageFormatter();
-            string linkToBeSend = receiving.Body.ToString();
-            return linkToBeSend;
-        }
+                using (MailMessage mailMessage = new MailMessage("tnak369@gmail.com", email))
+                {
+                    mailMessage.Subject = "Link to reset Password";
+                    mailMessage.Body = messageBody;
+                    mailMessage.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("tnak369@gmail.com", "Password");
+                    smtp.Port = 587;
+                    smtp.Send(mailMessage);
+                    return true;
+                }
+            }
 
         /// <summary>
         /// Method to Add new User to the Database
@@ -130,7 +116,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                  string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
+                    string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
                     var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
                     if (loginUser != null)
                     {
@@ -154,26 +140,37 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var userCheck = this.userContext.Users.Where(x => x.Email == email).FirstOrDefault();
-                if (userCheck != null)
-                {
-                    SendMessage();
-                    var messageBody = ReceiverMessage();
-                    using (MailMessage mailMessage = new MailMessage("tnak369@gmail.com", email))
+
+                    var url = "Click on following link to reset your credentials for Fundoonotes App: Link";
+                    MessageQueue msmqQueue = new MessageQueue();
+                    if (MessageQueue.Exists(@".\Private$\MyQueue"))
                     {
-                        mailMessage.Subject = "Link to reset Password";
-                        mailMessage.Body = messageBody;
-                        mailMessage.IsBodyHtml = true;
-                        SmtpClient smtp = new SmtpClient();
-                        smtp.Host = "smtp.gmail.com";
-                        smtp.EnableSsl = true;
-                        smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("tnak369@gmail.com", "gowthami");
-                        smtp.Port = 587;
-                        smtp.Send(mailMessage);
+                        msmqQueue = new MessageQueue(@".\Private$\MyQueue");
+                    }
+                    else
+                    {
+                        msmqQueue = MessageQueue.Create(@".\Private$\MyQueue");
                     }
 
-                    return true;
+                    Message message = new Message();
+                    message.Formatter = new BinaryMessageFormatter();
+                    message.Body = url;
+                    msmqQueue.Label = "url link";
+                    msmqQueue.Send(message);
+
+                    MessageQueue receiver = new MessageQueue(@".\Private$\MyQueue");
+                    var receiving = receiver.Receive();
+                    receiving.Formatter = new BinaryMessageFormatter();
+                    string messageBody = receiving.Body.ToString();
+
+                    var userCheck = this.userContext.Users.Where(x => x.Email == email).FirstOrDefault();
+                if (userCheck != null)
+                {
+                    if(SendMail(email, messageBody) ==true)
+                    {
+                        return true;
+                    }    
+                    return false;
                 }
 
                 return false;
