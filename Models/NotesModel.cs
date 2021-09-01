@@ -4,9 +4,9 @@
 // </copyright>
 // <creator name="Akshay Kumar T N "/>
 // ----------------------------------------------------------------------------------------------------------
-namespace Models
+namespace FundooNotes
 {
-    using FundooNotes;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,7 +20,7 @@ namespace Models
         /// </summary>
         [Key]
         public int NotesId { get; set; }
-
+               
         /// <summary>
         /// Gets or sets Field 'Title' of type string
         /// </summary>
@@ -59,12 +59,14 @@ namespace Models
         /// <summary>
         /// Gets or sets Field 'Pin' of type Boolean
         /// </summary>
-        public bool Pin { get; set; } = false;
+        [DefaultValue(false)]
+        public bool Pin { get; set; }
 
         /// <summary>
         /// Gets or sets Field 'Archieve' of type Boolean
         /// </summary>
-        public bool Archieve { get; set; } = false;
+        [DefaultValue(false)]
+        public bool Archieve { get; set; }
 
         /// <summary>
         /// Gets or sets Field 'UserId' of type integer
@@ -75,6 +77,6 @@ namespace Models
         /// <summary>
         /// Gets or sets Field 'RegisterModel' of type RegisterModel
         /// </summary>
-        public RegisterModel RegisterModel { get; set; }
+        public virtual RegisterModel RegisterModel { get; set; }
     }
 }

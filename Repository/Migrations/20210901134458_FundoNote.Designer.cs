@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Repository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210901080643_Notes")]
-    partial class Notes
+    [Migration("20210901134458_FundoNote")]
+    partial class FundoNote
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,35 +20,7 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FundooNotes.RegisterModel", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Models.NotesModel", b =>
+            modelBuilder.Entity("FundooNotes.NotesModel", b =>
                 {
                     b.Property<int>("NotesId")
                         .ValueGeneratedOnAdd()
@@ -92,7 +64,35 @@ namespace Repository.Migrations
                     b.ToTable("FundooNotes");
                 });
 
-            modelBuilder.Entity("Models.NotesModel", b =>
+            modelBuilder.Entity("FundooNotes.RegisterModel", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FundooNotes.NotesModel", b =>
                 {
                     b.HasOne("FundooNotes.RegisterModel", "RegisterModel")
                         .WithMany()

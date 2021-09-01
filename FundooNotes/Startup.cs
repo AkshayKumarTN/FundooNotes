@@ -7,6 +7,7 @@
 namespace FundooNotes
 {
     using FundooNotes.Manager;
+    using FundooNotes.Manager.Interface;
     using FundooNotes.Managers.Interface;
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;    
@@ -48,6 +49,8 @@ namespace FundooNotes
                 option => option.UseSqlServer(this.Configuration.GetConnectionString("UserDbConnection")));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<INotesRepository, NotesRepository>();
+            services.AddTransient<INotesManager, NotesManager>();
         }
 
         /// <summary>
