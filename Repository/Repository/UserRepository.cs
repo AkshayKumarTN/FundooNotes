@@ -118,7 +118,7 @@ namespace FundooNotes.Repository.Repository
             catch (ArgumentNullException ex)
             {
                 throw new Exception(ex.Message);
-            }            
+            }
         }
 
         /// <summary>
@@ -130,12 +130,12 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                  string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
-                    var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
-                    if (loginUser != null)
-                    {
-                        return true;
-                    }
+                string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
+                var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
+                if (loginUser != null)
+                {
+                    return true;
+                }
 
                 return false;
             }
@@ -168,7 +168,7 @@ namespace FundooNotes.Repository.Repository
                         smtp.Host = "smtp.gmail.com";
                         smtp.EnableSsl = true;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("tnak369@gmail.com", "gowthami");
+                        smtp.Credentials = new NetworkCredential("tnak369@gmail.com", "Password");
                         smtp.Port = 587;
                         smtp.Send(mailMessage);
                     }
@@ -182,8 +182,8 @@ namespace FundooNotes.Repository.Repository
             {
                 throw new Exception(ex.Message);
             }
-        }             
-        
+        }
+
         /// <summary>
         /// This function to Reset Password in the Database
         /// </summary>
@@ -212,6 +212,11 @@ namespace FundooNotes.Repository.Repository
             }
         }
 
+        /// <summary>
+        /// GenerateToken Method
+        /// </summary>
+        /// <param name="email">string email</param>
+        /// <returns>token string</returns>
         public string GenerateToken(string email)
         {
             byte[] key = Convert.FromBase64String(this.configuration["SecretKey"]);

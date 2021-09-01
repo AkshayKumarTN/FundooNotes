@@ -42,8 +42,8 @@ namespace FundooNotes.Repository.Interface
         /// <summary>
         /// GenerateToken method Declaration
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="username">string username</param>
+        /// <returns>string</returns>
         public string GenerateToken(string username);
     }
 }

@@ -42,8 +42,8 @@ namespace FundooNotes.Managers.Interface
         /// <summary>
         /// GenerateToken method Declaration
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="username">string email</param>
+        /// <returns>string</returns>
         public string GenerateToken(string email);
     }
 }
