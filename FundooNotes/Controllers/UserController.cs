@@ -71,7 +71,8 @@ namespace FundooNotes.Controllers
                 bool result = this.manager.Login(userLoginData);
                 if (result == true)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull!" });
+                    string tokenString = this.manager.GenerateToken(userLoginData.Email);
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull!", Data= tokenString });
                 }
                 else
                 {

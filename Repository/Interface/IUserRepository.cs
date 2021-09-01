@@ -38,5 +38,12 @@ namespace FundooNotes.Repository.Interface
         /// <param name="resetPasswordData">resetPasswordData parameter</param>
         /// <returns>boolean result</returns>
         bool ResetPassword(ResetPasswordModel resetPasswordData);
+
+        /// <summary>
+        /// GenerateToken method Declaration
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GenerateToken(string username);
     }
 }

@@ -7,13 +7,17 @@
 namespace FundooNotes.Repository.Repository
 {
     using System;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Net;
     using System.Net.Mail;
+    using System.Security.Claims;
     using Experimental.System.Messaging;
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.Extensions.Configuration;
 
     /// <summary>
     /// UserRepository Class
@@ -24,14 +28,16 @@ namespace FundooNotes.Repository.Repository
         /// Field userContext of type UserContext
         /// </summary>
         private readonly UserContext userContext;
+        private readonly IConfiguration configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserRepository" /> class.
         /// </summary>
         /// <param name="userContext">userContext Parameter</param>
-        public UserRepository(UserContext userContext)
+        public UserRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
+            this.configuration = configuration;
         }
 
         /// <summary>
@@ -204,6 +210,23 @@ namespace FundooNotes.Repository.Repository
             {
                 throw new ArgumentNullException(ex.Message);
             }
+        }
+
+        public string GenerateToken(string email)
+        {
+            byte[] key = Convert.FromBase64String(this.configuration["SecretKey"]);
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
+            SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] {
+                new Claim(ClaimTypes.Name, email)
+            }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(descriptor);
+            return handler.WriteToken(token);
         }
     }
 }
