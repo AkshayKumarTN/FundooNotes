@@ -112,18 +112,23 @@ namespace FundooNotes.Repository.Repository
         /// </summary>
         /// <param name="userLoginData">userLoginData parameter</param>
         /// <returns>boolean result</returns>
-        public bool Login(LoginModel userLoginData)
+        public string Login(LoginModel userLoginData)
         {
             try
             {
+                    string message;
                     string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
                     var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
                     if (loginUser != null)
                     {
-                        return true;
+                        message = "LOGIN SUCCESS";
+                    }
+                    else
+                    {
+                    message = "LOGIN UNSUCCESSFUL, Email Or Password is Wrong";
                     }
 
-                return false;
+                    return message;
             }
             catch (ArgumentNullException ex)
             {

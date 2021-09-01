@@ -50,8 +50,8 @@ namespace FundooNotes.Manager
         /// Method to call Login Method which belongs to IUserRepository interface
         /// </summary>
         /// <param name="userLoginData">userLoginData parameter</param>
-        /// <returns>boolean result</returns>
-        public bool Login(LoginModel userLoginData)
+        /// <returns>string result</returns>
+        public string Login(LoginModel userLoginData)
         {
             try
             {

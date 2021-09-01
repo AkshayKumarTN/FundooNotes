@@ -61,18 +61,18 @@ namespace FundooNotes.Controllers
         /// Login method for User Login
         /// </summary>
         /// <param name="userLoginData"> LoginModel Data</param>
-        /// <returns> Response with Status And Message </returns>
+        /// <returns> Response with Message </returns>
         [HttpGet]
         [Route("api/Login")]
         public IActionResult Login([FromBody] LoginModel userLoginData)
         {
             try
             {
-                bool result = this.manager.Login(userLoginData);
-                if (result == true)
+                string message = this.manager.Login(userLoginData);
+                if (message.Equals("LOGIN SUCCESS"))
                 {
                     string tokenString = this.manager.GenerateToken(userLoginData.Email);
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull!", Data= tokenString });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = message, Data= tokenString });
                 }
                 else
                 {

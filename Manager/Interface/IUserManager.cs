@@ -22,8 +22,8 @@ namespace FundooNotes.Managers.Interface
         /// Login Method Declaration 
         /// </summary>
         /// <param name="userLoginData">userLoginData parameter</param>
-        /// <returns>boolean result</returns>
-        bool Login(LoginModel userLoginData);
+        /// <returns>string result</returns>
+        string Login(LoginModel userLoginData);
 
         /// <summary>
         /// Forgot password method Declaration
