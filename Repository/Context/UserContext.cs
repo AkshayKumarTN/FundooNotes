@@ -4,10 +4,17 @@
 // </copyright>
 // <creator name="Akshay Kumar T N "/>
 // ----------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserContext.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Akshay Kumar T N "/>
+// ----------------------------------------------------------------------------------------------------------
 namespace FundooNotes.Repository.Context
 {
     using FundooNotes;
     using Microsoft.EntityFrameworkCore;
+    using Models;
 
     /// <summary>
     /// UserContext Class
@@ -26,5 +33,10 @@ namespace FundooNotes.Repository.Context
         /// Gets or sets Field 'Users' of type DataBaseSet
         /// </summary>
         public DbSet<RegisterModel> Users { get; set; }
+
+        /// <summary>
+        /// Gets or sets Field 'FundooNotes' of type DataBaseSet
+        /// </summary>
+        public DbSet<NotesModel> FundooNotes { get; set; }
     }
 }
