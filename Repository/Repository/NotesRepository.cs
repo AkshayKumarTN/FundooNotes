@@ -258,6 +258,19 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<NotesModel> ArchiveNotes(int userId)
+        {
+            try
+            {
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Archieve == true).ToList();
+                return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }

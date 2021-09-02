@@ -232,5 +232,20 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "No UnPinned Notes" });
             }
         }
+
+        [HttpPut]
+        [Route("api/ArchiveNotes")]
+        public IActionResult ArchiveNotes(int userId)
+        {
+            var result = this.notes.ArchiveNotes(userId);
+            if (result.Count > 0)
+            {
+                return this.Ok(new { success = true, Message = "Retrieved Archive Notes Successfully", Data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "No Archive Notes" });
+            }
+        }
     }
 }

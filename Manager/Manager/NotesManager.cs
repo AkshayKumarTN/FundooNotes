@@ -88,6 +88,11 @@
             List<NotesModel> message = this.notes.UnPinnedNotes(userId);
             return message;
         }
+        public List<NotesModel> ArchiveNotes(int userId)
+        {
+            List<NotesModel> message = this.notes.ArchiveNotes(userId);
+            return message;
+        }
 
     }
 }
