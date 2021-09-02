@@ -7,8 +7,8 @@
         public string DeleteNote(int noteId);
         public string DeleteNoteForever(int noteId);
         public string UpdateNote(NotesModel note);
-        public string PinNotes(int noteId);
-        public string UnPinNotes(int noteId);
+        public string PinNote(int noteId);
+        public string UnPinNote(int noteId);
         public string Archive(int noteId);
         public string UnArchive(int noteId);
         public string NoteColor(int noteId, string color);

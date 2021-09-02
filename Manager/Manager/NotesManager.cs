@@ -41,14 +41,14 @@
             return message;
         }
 
-        public string PinNotes(int noteId)
+        public string PinNote(int noteId)
         {
-            string message = this.notes.PinNotes(noteId);
+            string message = this.notes.PinNote(noteId);
             return message;
         }
-        public string UnPinNotes(int noteId)
+        public string UnPinNote(int noteId)
         {
-            string message = this.notes.UnPinNotes(noteId);
+            string message = this.notes.UnPinNote(noteId);
             return message;
         }
         public string Archive(int noteId)

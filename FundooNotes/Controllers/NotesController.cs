@@ -23,8 +23,8 @@ namespace FundooNotes.Controllers
         /// <param name="notes">new notes</param>
         /// <returns>response data</returns>
         [HttpPost]
-        [Route("api/NewNotes")]
-        public IActionResult Notes([FromBody] NotesModel notes)
+        [Route("api/AddNewNote")]
+        public IActionResult AddNewNote([FromBody] NotesModel notes)
         {
             var result = this.notes.AddNewNote(notes);
             if (result.Equals("SUCCESS"))
@@ -99,10 +99,10 @@ namespace FundooNotes.Controllers
         }
 
         [HttpPut]
-        [Route("api/PinNotes")]
-        public IActionResult PinNotes(int noteId)
+        [Route("api/PinNote")]
+        public IActionResult PinNote(int noteId)
         {
-            var result = this.notes.PinNotes(noteId);
+            var result = this.notes.PinNote(noteId);
             if (result.Equals("SUCCESS"))
             {
                 return this.Ok(new { success = true, Message = "Pinned  Successfully" });
@@ -114,10 +114,10 @@ namespace FundooNotes.Controllers
         }
 
         [HttpPut]
-        [Route("api/UnPinNotes")]
-        public IActionResult UnPinNotes(int noteId)
+        [Route("api/UnPinNote")]
+        public IActionResult UnPinNote(int noteId)
         {
-            var result = this.notes.UnPinNotes(noteId);
+            var result = this.notes.UnPinNote(noteId);
             if (result.Equals("SUCCESS"))
             {
                 return this.Ok(new { success = true, Message = "UnPinned  Successfully" });

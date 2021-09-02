@@ -92,7 +92,7 @@
             return message;
         }
 
-        public string PinNotes(int noteId)
+        public string PinNote(int noteId)
         {
             try
             {
@@ -112,7 +112,7 @@
             }
         }
 
-        public string UnPinNotes(int noteId)
+        public string UnPinNote(int noteId)
         {
             try
             {
