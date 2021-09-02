@@ -23,14 +23,19 @@
             return message;
         }
 
-        public string RemoveNote(int noteId)
+        public string DeleteNote(int noteId)
         {
             try
             {
-                var note = this.userContext.FundooNotes.Find(noteId);
-                this.userContext.FundooNotes.Remove(note);
-                this.userContext.SaveChangesAsync();
-                return "Note Deleted Successfully"; ;
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Trash = true;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
             }
             catch (Exception e)
             {
