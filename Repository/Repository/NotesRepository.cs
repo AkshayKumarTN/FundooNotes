@@ -237,7 +237,7 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==true).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==true && x.Trash == false && x.Archieve == false).ToList();
                 return notes;
             }
             catch (Exception ex)
@@ -250,7 +250,7 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==false).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==false && x.Trash == false && x.Archieve == false).ToList();
                 return notes;
             }
             catch (Exception ex)
@@ -263,7 +263,7 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Archieve == true).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Archieve == true && x.Trash == false).ToList();
                 return notes;
             }
             catch (Exception ex)
