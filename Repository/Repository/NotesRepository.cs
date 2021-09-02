@@ -284,6 +284,19 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<NotesModel> ReminderNotes(int userId)
+        {
+            try
+            {
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Reminder !=null && x.Trash==false).ToList();
+                return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }

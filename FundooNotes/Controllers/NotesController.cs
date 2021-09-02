@@ -262,5 +262,20 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "No Trash Notes" });
             }
         }
+
+        [HttpPut]
+        [Route("api/ReminderNotes")]
+        public IActionResult ReminderNotes(int userId)
+        {
+            var result = this.notes.ReminderNotes(userId);
+            if (result.Count > 0)
+            {
+                return this.Ok(new { success = true, Message = "Retrieved Reminder Notes Successfully", Data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "No Reminder Notes" });
+            }
+        }
     }
 }

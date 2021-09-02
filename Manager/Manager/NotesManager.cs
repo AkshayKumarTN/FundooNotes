@@ -98,6 +98,11 @@
             List<NotesModel> message = this.notes.TrashNotes(userId);
             return message;
         }
+        public List<NotesModel> ReminderNotes(int userId)
+        {
+            List<NotesModel> message = this.notes.ReminderNotes(userId);
+            return message;
+        }
 
     }
 }
