@@ -44,6 +44,22 @@
 
         }
 
+        public string DeleteNoteForever(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Find(noteId);
+                this.userContext.FundooNotes.Remove(note);
+                this.userContext.SaveChangesAsync();
+                return "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
         public string UpdateNote(NotesModel note)
         {
             if (note.NotesId != 0)

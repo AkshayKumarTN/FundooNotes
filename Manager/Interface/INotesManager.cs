@@ -5,6 +5,7 @@
     {
         public string AddNewNote(NotesModel note);
         public string DeleteNote(int noteId);
+        public string DeleteNoteForever(int noteId);
         public string UpdateNote(NotesModel note);
         public string PinNotes(int noteId);
         public string UnPinNotes(int noteId);

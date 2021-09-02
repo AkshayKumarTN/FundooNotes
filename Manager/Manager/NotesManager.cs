@@ -24,6 +24,11 @@
             string note = this.notes.DeleteNote(noteId);
             return note;
         }
+        public string DeleteNoteForever(int noteId)
+        {
+            string note = this.notes.DeleteNoteForever(noteId);
+            return note;
+        }
 
         public string UpdateNote(NotesModel note)
         {

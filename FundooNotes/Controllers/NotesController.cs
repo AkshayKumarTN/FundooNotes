@@ -53,6 +53,21 @@ namespace FundooNotes.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/DeleteNoteForever")]
+        public IActionResult DeleteNoteForever(int noteId)
+        {
+            var result = this.notes.DeleteNoteForever(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Note Deleted Forever Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, Message = "Invalid NoteId" });
+            }
+        }
+
         [HttpPut]
         [Route("api/UpdateNote")]
         public IActionResult UpdateEmployeeDetails([FromBody] NotesModel note)
