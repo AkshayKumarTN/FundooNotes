@@ -56,6 +56,16 @@
             string message = this.notes.NoteColor(noteId, color);
             return message;
         }
+        public string SetReminder(int noteId, string reminder)
+        {
+            string message = this.notes.SetReminder(noteId, reminder);
+            return message;
+        }
+        public string DeleteReminder(int noteId)
+        {
+            string message = this.notes.DeleteReminder(noteId);
+            return message;
+        }
 
     }
 }

@@ -149,6 +149,46 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public string SetReminder(int noteId, string reminder)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Reminder = reminder;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string DeleteReminder(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Reminder = null;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }

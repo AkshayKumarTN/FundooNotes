@@ -142,5 +142,35 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
             }
         }
+
+        [HttpPut]
+        [Route("api/SetReminder")]
+        public IActionResult SetReminder(int noteId, string reminder)
+        {
+            var result = this.notes.SetReminder(noteId, reminder);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Reminder Set Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/DeleteReminder")]
+        public IActionResult DeleteReminder(int noteId)
+        {
+            var result = this.notes.DeleteReminder(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Reminder Deleted Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
     }
 }

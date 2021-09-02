@@ -11,5 +11,7 @@
         public string Archive(int noteId);
         public string UnArchive(int noteId);
         public string NoteColor(int noteId, string color);
+        public string SetReminder(int noteId, string reminder);
+        public string DeleteReminder(int noteId);
     }
 }
