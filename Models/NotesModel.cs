@@ -69,6 +69,12 @@ namespace FundooNotes
         public bool Archieve { get; set; }
 
         /// <summary>
+        /// Gets or sets Field 'Trash' of type Boolean
+        /// </summary>
+        [DefaultValue(false)]
+        public bool Trash { get; set; }
+
+        /// <summary>
         /// Gets or sets Field 'UserId' of type integer
         /// </summary>
         [ForeignKey("RegisterModel")]

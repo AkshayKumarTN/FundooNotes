@@ -30,5 +30,16 @@
             string message = this.notes.UpdateNote(note);
             return message;
         }
+
+        public string PinNotes(int noteId)
+        {
+            string message = this.notes.PinNotes(noteId);
+            return message;
+        }
+        public string UnPinNotes(int noteId)
+        {
+            string message = this.notes.UnPinNotes(noteId);
+            return message;
+        }
     }
 }

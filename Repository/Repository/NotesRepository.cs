@@ -1,6 +1,7 @@
 ﻿namespace FundooNotes.Repository.Repository
 {
     using System;
+    using System.Linq;
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
@@ -48,5 +49,46 @@
             string message = "SUCCESS";
             return message;
         }
+
+        public string PinNotes(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Pin = true;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string UnPinNotes(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Pin = false;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
+    
 }

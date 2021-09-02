@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class FundoNote : Migration
+    public partial class FundooNotes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,7 @@ namespace Repository.Migrations
                     Lable = table.Column<string>(nullable: true),
                     Pin = table.Column<bool>(nullable: false),
                     Archieve = table.Column<bool>(nullable: false),
+                    Trash = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

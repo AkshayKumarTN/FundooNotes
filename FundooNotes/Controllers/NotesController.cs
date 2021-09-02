@@ -1,4 +1,5 @@
 ﻿using FundooNotes.Manager.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,36 @@ namespace FundooNotes.Controllers
             else
             {
                 return this.BadRequest(new { success = true, Message = "Error While updating note" });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/PinNotes")]
+        public IActionResult PinNotes(int noteId)
+        {
+            var result = this.notes.PinNotes(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Pinned  Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/UnPinNotes")]
+        public IActionResult UnPinNotes(int noteId)
+        {
+            var result = this.notes.UnPinNotes(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "UnPinned  Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
             }
         }
     }
