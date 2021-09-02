@@ -19,9 +19,9 @@
             return message;
         }
 
-        public string RemoveNote(int id)
+        public string RemoveNote(int noteId)
         {
-            string note = this.notes.RemoveNote(id);
+            string note = this.notes.RemoveNote(noteId);
             return note;
         }
 

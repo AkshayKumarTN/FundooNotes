@@ -40,9 +40,9 @@ namespace FundooNotes.Controllers
 
         [HttpDelete]
         [Route("api/DeleteNote")]
-        public IActionResult RemoveEmployeeById(int id)
+        public IActionResult RemoveEmployeeById(int noteId)
         {
-            var result = this.notes.RemoveNote(id);
+            var result = this.notes.RemoveNote(noteId);
             if (result.Equals("Note Deleted Successfully"))
             {
                 return this.Ok(result);

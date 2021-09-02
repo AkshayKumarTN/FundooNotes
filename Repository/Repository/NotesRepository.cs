@@ -23,11 +23,11 @@
             return message;
         }
 
-        public string RemoveNote(int id)
+        public string RemoveNote(int noteId)
         {
             try
             {
-                var note = this.userContext.FundooNotes.Find(id);
+                var note = this.userContext.FundooNotes.Find(noteId);
                 this.userContext.FundooNotes.Remove(note);
                 this.userContext.SaveChangesAsync();
                 return "Note Deleted Successfully"; ;
