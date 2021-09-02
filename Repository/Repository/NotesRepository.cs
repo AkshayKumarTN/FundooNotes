@@ -60,6 +60,27 @@
 
         }
 
+        public string RestoreNote(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Trash = false;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
         public string UpdateNote(NotesModel note)
         {
             if (note.NotesId != 0)

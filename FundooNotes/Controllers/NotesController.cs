@@ -69,6 +69,21 @@ namespace FundooNotes.Controllers
         }
 
         [HttpPut]
+        [Route("api/RestoreNote")]
+        public IActionResult RestoreNote(int noteId)
+        {
+            var result = this.notes.RestoreNote(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Note Restored Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, Message = "Invalid NoteId" });
+            }
+        }
+
+        [HttpPut]
         [Route("api/UpdateNote")]
         public IActionResult UpdateEmployeeDetails([FromBody] NotesModel note)
         {

@@ -14,6 +14,7 @@
         public string NoteColor(int noteId, string color);
         public string SetReminder(int noteId, string reminder);
         public string DeleteReminder(int noteId);
+        public string RestoreNote(int noteId);
 
     }
 }
