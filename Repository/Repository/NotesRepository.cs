@@ -271,6 +271,19 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<NotesModel> TrashNotes(int userId)
+        {
+            try
+            {
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Trash == true).ToList();
+                return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }

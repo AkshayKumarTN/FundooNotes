@@ -93,6 +93,11 @@
             List<NotesModel> message = this.notes.ArchiveNotes(userId);
             return message;
         }
+        public List<NotesModel> TrashNotes(int userId)
+        {
+            List<NotesModel> message = this.notes.TrashNotes(userId);
+            return message;
+        }
 
     }
 }

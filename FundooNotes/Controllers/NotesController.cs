@@ -247,5 +247,20 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "No Archive Notes" });
             }
         }
+
+        [HttpPut]
+        [Route("api/TrashNotes")]
+        public IActionResult TrashNotes(int userId)
+        {
+            var result = this.notes.TrashNotes(userId);
+            if (result.Count > 0)
+            {
+                return this.Ok(new { success = true, Message = "Retrieved Trash Notes Successfully", Data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "No Trash Notes" });
+            }
+        }
     }
 }

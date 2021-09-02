@@ -20,5 +20,6 @@
         public List<NotesModel> PinnedNotes(int userId);
         public List<NotesModel> UnPinnedNotes(int userId);
         public List<NotesModel> ArchiveNotes(int userId);
+        public List<NotesModel> TrashNotes(int userId);
     }
 }
