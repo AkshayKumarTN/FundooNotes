@@ -51,5 +51,11 @@
             string message = this.notes.UnArchive(noteId);
             return message;
         }
+        public string NoteColor(int noteId, string color)
+        {
+            string message = this.notes.NoteColor(noteId, color);
+            return message;
+        }
+
     }
 }

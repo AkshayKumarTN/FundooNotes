@@ -10,5 +10,6 @@
         public string UnPinNotes(int noteId);
         public string Archive(int noteId);
         public string UnArchive(int noteId);
+        public string NoteColor(int noteId, string color);
     }
 }

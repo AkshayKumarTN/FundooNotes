@@ -129,6 +129,26 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public string NoteColor(int noteId, string color)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Color = color;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }

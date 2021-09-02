@@ -127,5 +127,20 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
             }
         }
+
+        [HttpPut]
+        [Route("api/NoteColor")]
+        public IActionResult NoteColor(int noteId, string color)
+        {
+            var result = this.notes.NoteColor(noteId, color);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "NoteColor Changed Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
     }
 }
