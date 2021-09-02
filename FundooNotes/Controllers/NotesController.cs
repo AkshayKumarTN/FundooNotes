@@ -85,7 +85,7 @@ namespace FundooNotes.Controllers
 
         [HttpPut]
         [Route("api/UpdateNote")]
-        public IActionResult UpdateEmployeeDetails([FromBody] NotesModel note)
+        public IActionResult UpdateNote([FromBody] NotesModel note)
         {
             var result = this.notes.UpdateNote(note);
             if (result.Equals("SUCCESS"))
