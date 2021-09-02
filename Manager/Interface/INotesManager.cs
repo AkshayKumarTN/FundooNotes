@@ -8,5 +8,8 @@
         public string UpdateNote(NotesModel note);
         public string PinNotes(int noteId);
         public string UnPinNotes(int noteId);
+        public string Archive(int noteId);
+        public string UnArchive(int noteId);
+
     }
 }

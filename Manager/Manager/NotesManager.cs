@@ -41,5 +41,15 @@
             string message = this.notes.UnPinNotes(noteId);
             return message;
         }
+        public string Archive(int noteId)
+        {
+            string message = this.notes.Archive(noteId);
+            return message;
+        }
+        public string UnArchive(int noteId)
+        {
+            string message = this.notes.UnArchive(noteId);
+            return message;
+        }
     }
 }

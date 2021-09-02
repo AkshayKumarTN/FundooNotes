@@ -97,5 +97,35 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
             }
         }
+
+        [HttpPut]
+        [Route("api/Archive")]
+        public IActionResult Archive(int noteId)
+        {
+            var result = this.notes.Archive(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "Archive  Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/UnArchive")]
+        public IActionResult UnArchive(int noteId)
+        {
+            var result = this.notes.UnArchive(noteId);
+            if (result.Equals("SUCCESS"))
+            {
+                return this.Ok(new { success = true, Message = "UnArchive  Successfully" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
+            }
+        }
     }
 }

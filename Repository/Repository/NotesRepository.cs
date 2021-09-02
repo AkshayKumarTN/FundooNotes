@@ -89,6 +89,46 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public string Archive(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Archieve = true;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string UnArchive(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Archieve = false;
+                    this.userContext.FundooNotes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "SUCCESS";
+                }
+                return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     
 }
