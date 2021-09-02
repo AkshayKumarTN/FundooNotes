@@ -1,6 +1,7 @@
 ﻿namespace FundooNotes.Repository.Repository
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
@@ -225,6 +226,32 @@
                     return "SUCCESS";
                 }
                 return "UNSUCCESS";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<NotesModel> PinnedNotes(int userId)
+        {
+            try
+            {
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==true).ToList();
+                return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<NotesModel> UnPinnedNotes(int userId)
+        {
+            try
+            {
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==false).ToList();
+                return notes;
             }
             catch (Exception ex)
             {

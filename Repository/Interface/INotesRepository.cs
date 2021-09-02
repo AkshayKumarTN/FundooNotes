@@ -1,6 +1,8 @@
 ﻿namespace FundooNotes.Repository.Interface
 {
     using Models;
+    using System.Collections.Generic;
+
     public interface INotesRepository
     {
         public string AddNewNote(NotesModel note);
@@ -15,5 +17,7 @@
         public string SetReminder(int noteId, string reminder);
         public string DeleteReminder(int noteId);
         public string RestoreNote(int noteId);
+        public List<NotesModel> PinnedNotes(int userId);
+        public List<NotesModel> UnPinnedNotes(int userId);
     }
 }

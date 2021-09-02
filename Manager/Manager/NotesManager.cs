@@ -3,6 +3,7 @@
     using FundooNotes.Manager.Interface;
     using Models;
     using Repository.Interface;
+    using System.Collections.Generic;
 
     public class NotesManager : INotesManager
     {
@@ -74,6 +75,17 @@
         public string DeleteReminder(int noteId)
         {
             string message = this.notes.DeleteReminder(noteId);
+            return message;
+        }
+
+        public List<NotesModel> PinnedNotes(int userId)
+        {
+            List<NotesModel> message = this.notes.PinnedNotes(userId);
+            return message;
+        }
+        public List<NotesModel> UnPinnedNotes(int userId)
+        {
+            List<NotesModel> message = this.notes.UnPinnedNotes(userId);
             return message;
         }
 

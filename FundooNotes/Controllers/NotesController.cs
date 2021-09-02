@@ -202,5 +202,35 @@ namespace FundooNotes.Controllers
                 return this.BadRequest(new { success = true, Message = "Invalid NoteId" });
             }
         }
+
+        [HttpPut]
+        [Route("api/PinnedNotes")]
+        public IActionResult PinnedNotes(int userId)
+        {
+            var result = this.notes.PinnedNotes(userId);
+            if (result.Count > 0)
+            {
+                return this.Ok(new { success = true, Message = "Retrieved Pinned Notes Successfully", Data=result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "No Pinned Notes" });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/UnPinnedNotes")]
+        public IActionResult UnPinnedNotes(int userId)
+        {
+            var result = this.notes.UnPinnedNotes(userId);
+            if (result.Count > 0)
+            {
+                return this.Ok(new { success = true, Message = "Retrieved UnPinned Notes Successfully", Data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = true, Message = "No UnPinned Notes" });
+            }
+        }
     }
 }
