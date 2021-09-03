@@ -8,6 +8,7 @@
         public string AddNewNote(NotesModel note);
         public string DeleteNote(int noteId);
         public string DeleteNoteForever(int noteId);
+        public string EmptyTrash(int userId);
         public string UpdateNote(NotesModel note);
         public string PinNote(int noteId);
         public string UnPinNote(int noteId);

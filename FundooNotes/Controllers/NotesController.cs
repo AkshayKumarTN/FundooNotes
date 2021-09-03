@@ -69,6 +69,21 @@ namespace FundooNotes.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/EmptyTrash")]
+        public IActionResult EmptyTrash(int userId)
+        {
+            var result = this.notes.EmptyTrash(userId);
+            if (result.Equals("All notes in Trash permanently deleted") || result.Equals("No notes in Trash"))
+            {
+                return this.Ok(new { success = true, Message = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, Message = "Invalid NoteId" });
+            }
+        }
+
         [HttpPut]
         [Route("api/RestoreNote")]
         public IActionResult RestoreNote(int noteId)

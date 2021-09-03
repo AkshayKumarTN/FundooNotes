@@ -30,6 +30,11 @@
             string note = this.notes.DeleteNoteForever(noteId);
             return note;
         }
+        public string EmptyTrash(int userId)
+        {
+            string note = this.notes.EmptyTrash(userId);
+            return note;
+        }
         public string RestoreNote(int noteId)
         {
             string note = this.notes.RestoreNote(noteId);

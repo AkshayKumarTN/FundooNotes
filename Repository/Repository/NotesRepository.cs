@@ -69,6 +69,29 @@
             {
                 throw e;
             }
+        }
+        public string EmptyTrash(int userId)
+        {
+            try
+            {
+                string result = "UNSUCCESS";
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Trash == true).ToList();
+                if (notes.Count != 0)
+                { 
+                    this.userContext.FundooNotes.RemoveRange(notes);
+                    this.userContext.SaveChangesAsync();
+                    result = "All notes in Trash permanently deleted";
+                }
+                else
+                {
+                    result = "No notes in Trash";
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
         }
 
