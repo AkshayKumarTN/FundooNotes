@@ -28,15 +28,26 @@
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                string result = "UNSUCCESS";
+                 var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Trash = true;
+                    note.Reminder = null;
+                    if(note.Pin == true)
+                    {
+                        note.Pin = false;
+                        result = "Note unpinned and trashed";
+                    }
+                    else
+                    {
+                        result = "Note trashed";
+                    }                    
                     this.userContext.FundooNotes.Update(note);
                     this.userContext.SaveChanges();
-                    return "SUCCESS";
+                    return result;
                 }
-                return "UNSUCCESS";
+                return result;
             }
             catch (Exception e)
             {

@@ -44,9 +44,9 @@ namespace FundooNotes.Controllers
         public IActionResult DeleteNote(int noteId)
         {
             var result = this.notes.DeleteNote(noteId);
-            if (result.Equals("SUCCESS"))
+            if (result.Equals("Note unpinned and trashed") || result.Equals("Note trashed"))
             {
-                return this.Ok(new { success = true, Message = "Note Moved To Trash Successfully" });
+                return this.Ok(new { success = true, Message = result });
             }
             else
             {
