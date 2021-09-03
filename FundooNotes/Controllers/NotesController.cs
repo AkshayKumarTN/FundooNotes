@@ -104,9 +104,9 @@ namespace FundooNotes.Controllers
         public IActionResult PinNote(int noteId)
         {
             var result = this.notes.PinNote(noteId);
-            if (result.Equals("SUCCESS"))
+            if (result.Equals("Note unarchived and pinned") || result.Equals("Note pinned"))
             {
-                return this.Ok(new { success = true, Message = "Pinned  Successfully" });
+                return this.Ok(new { success = true, Message = result });
             }
             else
             {
