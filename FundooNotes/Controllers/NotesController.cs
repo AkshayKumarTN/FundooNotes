@@ -149,9 +149,9 @@ namespace FundooNotes.Controllers
         public IActionResult UnArchive(int noteId)
         {
             var result = this.notes.UnArchive(noteId);
-            if (result.Equals("SUCCESS"))
+            if (result.Equals("Note unarchived"))
             {
-                return this.Ok(new { success = true, Message = "UnArchive  Successfully" });
+                return this.Ok(new { success = true, Message = result });
             }
             else
             {
