@@ -18,6 +18,7 @@ namespace FundooNotes.Repository.Repository
     using Microsoft.EntityFrameworkCore;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.Extensions.Configuration;
+    using System.Text;
 
     /// <summary>
     /// UserRepository Class
@@ -216,7 +217,7 @@ namespace FundooNotes.Repository.Repository
 
         public string GenerateToken(string email)
         {
-            byte[] key = Convert.FromBase64String(this.configuration["SecretKey"]);
+            byte[] key = Encoding.UTF8.GetBytes(this.configuration["SecretKey"]);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {

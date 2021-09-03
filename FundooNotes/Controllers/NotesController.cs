@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
+    [Authorize]
     public class NotesController : ControllerBase
     {
         private readonly INotesManager notes;

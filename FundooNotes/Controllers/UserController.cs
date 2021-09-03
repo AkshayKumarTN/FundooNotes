@@ -62,7 +62,7 @@ namespace FundooNotes.Controllers
         /// </summary>
         /// <param name="userLoginData"> LoginModel Data</param>
         /// <returns> Response with Message </returns>
-        [HttpGet]
+        [HttpPost]
         [Route("api/Login")]
         public IActionResult Login([FromBody] LoginModel userLoginData)
         {
