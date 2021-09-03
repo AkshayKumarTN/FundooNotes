@@ -148,15 +148,25 @@
         {
             try
             {
+                string result = "UNSUCCESS";
                 var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Archieve = true;
+                    if (note.Pin == true)
+                    {
+                        note.Pin = false;
+                        result = "Note unpinned and archived";
+                    }
+                    else
+                    {
+                        result = "Note archived";
+                    }
                     this.userContext.FundooNotes.Update(note);
                     this.userContext.SaveChanges();
-                    return "SUCCESS";
+                    return result;
                 }
-                return "UNSUCCESS";
+                return result;
             }
             catch (Exception ex)
             {

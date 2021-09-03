@@ -134,9 +134,9 @@ namespace FundooNotes.Controllers
         public IActionResult Archive(int noteId)
         {
             var result = this.notes.Archive(noteId);
-            if (result.Equals("SUCCESS"))
+            if (result.Equals("Note unpinned and archived") || result.Equals("Note archived"))
             {
-                return this.Ok(new { success = true, Message = "Archive  Successfully" });
+                return this.Ok(new { success = true, Message = result });
             }
             else
             {
