@@ -38,5 +38,10 @@ namespace FundooNotes.Repository.Context
         /// Gets or sets Field 'FundooNotes' of type DataBaseSet
         /// </summary>
         public DbSet<NotesModel> FundooNotes { get; set; }
+
+        /// <summary>
+        /// Gets or sets Field 'Collaborators' of type DataBaseSet
+        /// </summary>
+        public DbSet<CollaboratorsModel> Collaborators { get; set; }
     }
 }
