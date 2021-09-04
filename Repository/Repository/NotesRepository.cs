@@ -125,7 +125,8 @@
             this.userContext.SaveChanges();
             string message = "SUCCESS";
             return message;
-        }
+            }
+        
 
         public string PinNote(int noteId)
         {
