@@ -1,4 +1,10 @@
-﻿namespace FundooNotes
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LableModel.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Akshay Kumar T N "/>
+// ----------------------------------------------------------------------------------------------------------
+namespace FundooNotes
 {
     using FundooNotes;
     using System;

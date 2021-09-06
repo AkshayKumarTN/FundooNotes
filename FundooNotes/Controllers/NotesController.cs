@@ -1,14 +1,18 @@
-﻿using FundooNotes.Manager.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorController.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Akshay Kumar T N "/>
+// ----------------------------------------------------------------------------------------------------------
 namespace FundooNotes.Controllers
 {
+    using System;
+    using FundooNotes.Manager.Interface;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    
+
     [Authorize]
     public class NotesController : ControllerBase
     {
