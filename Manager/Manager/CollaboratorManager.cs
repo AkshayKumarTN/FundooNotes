@@ -7,6 +7,7 @@
 namespace FundooNotes.Manager.Manager
 {
     using FundooNotes.Manager.Interface;
+    using FundooNotes.Repository.Interface;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -16,5 +17,17 @@ namespace FundooNotes.Manager.Manager
     /// </summary>
     public class CollaboratorManager : ICollaboratorManager
     {
+        private readonly ICollaboratorRepository collaborator;
+
+        public CollaboratorManager(ICollaboratorRepository collaborator)
+        {
+            this.collaborator = collaborator;
+        }
+
+        public string AddCollaborator(CollaboratorsModel collaborator)
+        {
+            string message = this.collaborator.AddCollaborator(collaborator);
+            return message;
+        }
     }
 }

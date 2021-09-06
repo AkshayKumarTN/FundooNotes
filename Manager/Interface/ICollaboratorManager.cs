@@ -15,5 +15,7 @@ namespace FundooNotes.Manager.Interface
     /// </summary>
     public interface ICollaboratorManager
     {
+        public string AddCollaborator(CollaboratorsModel collaborators);
+        
     }
 }

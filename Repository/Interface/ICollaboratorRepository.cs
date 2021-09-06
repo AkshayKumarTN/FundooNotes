@@ -12,5 +12,6 @@ namespace FundooNotes.Repository.Interface
     /// </summary>
     public interface ICollaboratorRepository
     {
+        public string AddCollaborator(CollaboratorsModel collaborators);
     }
 }
