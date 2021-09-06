@@ -13,5 +13,6 @@ namespace FundooNotes.Manager.Interface
     public interface ILableManager
     {
         public string CreateLable(LableModel lable);
+        public string UpdateLable(LableModel lable);
     }
 }

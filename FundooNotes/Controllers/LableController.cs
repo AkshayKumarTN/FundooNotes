@@ -52,5 +52,30 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<LableModel>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Controller Method to Update Lable 
+        /// </summary>
+        /// <param name="lable">lable parameter</param>
+        /// <returns>API response</returns>
+        [HttpPut]
+        [Route("api/UpdateLable")]
+        public IActionResult UpdateLable([FromBody] LableModel lable)
+        {
+            try
+            {
+                var message = this.lable.UpdateLable(lable);
+                if (message.Equals("Lable updated Successfully"))
+                {
+                    return this.Ok(new ResponseModel<LableModel>() { Status = true, Message = message, Data = lable });
+                }
+
+                return this.BadRequest(new ResponseModel<LableModel>() { Status = false, Message = message });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<LableModel>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

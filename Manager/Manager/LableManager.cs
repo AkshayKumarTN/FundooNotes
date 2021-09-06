@@ -26,5 +26,11 @@ namespace FundooNotes.Manager.Manager
             string message = this.lable.CreateLable(lable);
             return message;
         }
+
+        public string UpdateLable(LableModel lable)
+        {
+            string message = this.lable.UpdateLable(lable);
+            return message;
+        }
     }
 }

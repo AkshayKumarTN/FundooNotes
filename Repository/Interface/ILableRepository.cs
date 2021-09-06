@@ -12,5 +12,6 @@ namespace FundooNotes.Repository.Interface
     public interface ILableRepository
     {
         public string CreateLable(LableModel lable);
+        public string UpdateLable(LableModel lable);
     }
 }

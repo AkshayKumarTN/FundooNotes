@@ -10,6 +10,7 @@ namespace FundooNotes.Repository.Repository
 {
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Web.Mvc;
 
@@ -43,6 +44,32 @@ namespace FundooNotes.Repository.Repository
 
                 message = "Failed to Add New Lable to Database";
                 return message;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method to update lable
+        /// </summary>
+        /// <param name="lable">lable parameter</param>
+        /// <returns>string message</returns>
+        public string UpdateLable(LableModel lable)
+        {
+            try
+            {
+                string message;
+                if (lable.LableId != 0)
+                {
+                    this.userContext.Entry(lable).State = EntityState.Modified;
+                    this.userContext.SaveChanges();
+                    message = "Lable updated Successfully";
+                    return message;
+                }
+
+                return message = "Lable update Unsuccessfully";
             }
             catch (Exception ex)
             {
