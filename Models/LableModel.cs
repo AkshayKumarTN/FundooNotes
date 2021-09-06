@@ -18,7 +18,7 @@
         public virtual RegisterModel RegisterModel { get; set; }
 
         [ForeignKey("NotesModel")]
-        public int NoteId { get; set; }
+        public int? NotesId { get; set; }
         public virtual NotesModel NotesModel { get; set; }
     }
 }
