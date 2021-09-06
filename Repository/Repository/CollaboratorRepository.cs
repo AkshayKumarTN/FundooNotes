@@ -48,5 +48,33 @@ namespace FundooNotes.Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Method to Remove collaborator
+        /// </summary>
+        /// <param name="id">collaborator id</param>
+        /// <returns>boolean result</returns>
+        public bool DeleteCollaborator(int id)
+        {
+            try
+            {
+                bool result;
+                var collaborator = this.userContext.Collaborators.Find(id);
+                if (collaborator != null)
+                {
+                    this.userContext.Collaborators.Remove(collaborator);
+                    this.userContext.SaveChangesAsync();
+                    result = true;
+                    return result;
+                }
+
+                result = false;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

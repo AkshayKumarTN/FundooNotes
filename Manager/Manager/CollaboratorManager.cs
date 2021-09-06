@@ -29,5 +29,11 @@ namespace FundooNotes.Manager.Manager
             string message = this.collaborator.AddCollaborator(collaborator);
             return message;
         }
+
+        public bool DeleteCollaborator(int collaboratorId)
+        {
+            bool result = this.collaborator.DeleteCollaborator(collaboratorId);
+            return result;
+        }
     }
 }

@@ -42,5 +42,31 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<CollaboratorsModel>() { Status = false, Message = ex.Message });
             }
         }
+
+
+        /// <summary>
+        /// Controller method to Remove collaborator
+        /// </summary>
+        /// <param name="id">note id</param>
+        /// <returns>response data</returns>
+        [HttpDelete]
+        [Route("api/RemoveCollaborator")]
+        public IActionResult RemoveCollaborator(int collaboratorId)
+        {
+            try
+            {
+                var result = this.collaboratorManager.DeleteCollaborator(collaboratorId);
+                if (result == true)
+                {
+                    return this.Ok(new ResponseModel<int>() { Status = true, Message = "Collaborator Deleted Successfully !", Data = collaboratorId });
+                }
+
+                return this.BadRequest(new ResponseModel<int>() { Status = false, Message = "Unable to delete this Collaborator." });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<int>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

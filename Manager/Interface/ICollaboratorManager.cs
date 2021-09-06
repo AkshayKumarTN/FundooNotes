@@ -16,6 +16,12 @@ namespace FundooNotes.Manager.Interface
     public interface ICollaboratorManager
     {
         public string AddCollaborator(CollaboratorsModel collaborators);
-        
+        /// <summary>
+        /// Deletes Collaborator
+        /// </summary>
+        /// <param name="collaboratorId">collaboratorId</param>
+        /// <returns>Returns boolean</returns>
+        public bool DeleteCollaborator(int collaboratorId);
+
     }
 }
