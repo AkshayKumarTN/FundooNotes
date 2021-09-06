@@ -54,12 +54,12 @@ namespace FundooNotes.Repository.Repository
         /// </summary>
         /// <param name="id">collaborator id</param>
         /// <returns>boolean result</returns>
-        public bool DeleteCollaborator(int id)
+        public bool DeleteCollaborator(int collaboratorId)
         {
             try
             {
                 bool result;
-                var collaborator = this.userContext.Collaborators.Find(id);
+                var collaborator = this.userContext.Collaborators.Find(collaboratorId);
                 if (collaborator != null)
                 {
                     this.userContext.Collaborators.Remove(collaborator);

@@ -23,6 +23,11 @@ namespace FundooNotes.Controllers
             this.collaboratorManager = collaboratorManager;
         }
 
+        /// <summary>
+        /// AddCollaborator method to Add collaborator
+        /// </summary>
+        /// <param name="collaboraters"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/AddCollaborator")]
         public IActionResult AddCollaborator([FromBody] CollaboratorsModel collaboraters)
@@ -45,7 +50,7 @@ namespace FundooNotes.Controllers
 
 
         /// <summary>
-        /// Controller method to Remove collaborator
+        /// RemoveCollaborator method to Remove collaborator
         /// </summary>
         /// <param name="id">note id</param>
         /// <returns>response data</returns>
