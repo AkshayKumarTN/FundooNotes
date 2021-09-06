@@ -11,7 +11,7 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize]
+    ///[Authorize]
     public class LableController : ControllerBase
     {
         /// <summary>
@@ -75,6 +75,31 @@ namespace FundooNotes.Controllers
             catch (Exception ex)
             {
                 return this.NotFound(new ResponseModel<LableModel>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Method to delete lable
+        /// </summary>
+        /// <param name="id">lable id</param>
+        /// <returns>API response</returns>
+        [HttpDelete]
+        [Route("api/RemoveLable")]
+        public IActionResult RemoveLable(int lableId)
+        {
+            try
+            {
+                var message = this.lable.DeleteLable(lableId);
+                if (message.Equals("Lable Deleted Successfully"))
+                {
+                    return this.Ok(new ResponseModel<int>() { Status = true, Message = message, Data = lableId });
+                }
+
+                return this.BadRequest(new ResponseModel<int>() { Status = false, Message = message });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<int>() { Status = false, Message = ex.Message });
             }
         }
     }
