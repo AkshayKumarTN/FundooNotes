@@ -9,6 +9,7 @@ namespace FundooNotes.Repository.Repository
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// CollaboratorRepository Class
@@ -69,6 +70,31 @@ namespace FundooNotes.Repository.Repository
                 }
 
                 result = false;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method to Retrieve All collaborators
+        /// </summary>
+        /// <returns>existing collaborators</returns>
+        public IEnumerable<CollaboratorsModel> GetCollaborators()
+        {
+            try
+            {
+                IEnumerable<CollaboratorsModel> result;
+                var collaborators = this.userContext.Collaborators;
+                if (collaborators != null)
+                {
+                    result = collaborators;
+                    return result;
+                }
+
+                result = null;
                 return result;
             }
             catch (Exception ex)

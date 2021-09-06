@@ -8,9 +8,7 @@ namespace FundooNotes.Manager.Manager
 {
     using FundooNotes.Manager.Interface;
     using FundooNotes.Repository.Interface;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// CollaboratorManager Class
@@ -33,6 +31,12 @@ namespace FundooNotes.Manager.Manager
         public bool DeleteCollaborator(int collaboratorId)
         {
             bool result = this.collaborator.DeleteCollaborator(collaboratorId);
+            return result;
+        }
+
+        public IEnumerable<CollaboratorsModel> GetCollaborators()
+        {
+            IEnumerable<CollaboratorsModel> result = this.collaborator.GetCollaborators();
             return result;
         }
     }

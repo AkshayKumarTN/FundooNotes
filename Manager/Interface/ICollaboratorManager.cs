@@ -23,5 +23,11 @@ namespace FundooNotes.Manager.Interface
         /// <returns>Returns boolean</returns>
         public bool DeleteCollaborator(int collaboratorId);
 
+        /// <summary>
+        /// Gets Collaborators
+        /// </summary>
+        /// <returns>Collaborators</returns>
+        public IEnumerable<CollaboratorsModel> GetCollaborators();
+
     }
 }

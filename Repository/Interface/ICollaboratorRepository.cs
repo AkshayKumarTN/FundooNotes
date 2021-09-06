@@ -4,6 +4,8 @@
 // </copyright>
 // <creator name="Akshay Kumar T N "/>
 // ----------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
+
 namespace FundooNotes.Repository.Interface
 {
 
@@ -24,5 +26,11 @@ namespace FundooNotes.Repository.Interface
         /// <param name="collaboratorId">collaboratorId</param>
         /// <returns>Returns boolean</returns>
         public bool DeleteCollaborator(int collaboratorId);
+
+        /// <summary>
+        /// Gets Collaborators
+        /// </summary>
+        /// <returns>Collaborators</returns>
+        public IEnumerable<CollaboratorsModel> GetCollaborators();
     }
 }
