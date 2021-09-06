@@ -3,17 +3,23 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public class NotesRepository : INotesRepository
     {
         private readonly UserContext userContext;
+        private readonly IConfiguration configuration;
 
-        public NotesRepository(UserContext userContext)
+        public NotesRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
+            this.configuration = configuration;
         }
 
         public string AddNewNote(NotesModel note)
@@ -29,12 +35,12 @@
             try
             {
                 string result = "UNSUCCESS";
-                 var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Trash = true;
                     note.Reminder = null;
-                    if(note.Pin == true)
+                    if (note.Pin == true)
                     {
                         note.Pin = false;
                         result = "Note unpinned and trashed";
@@ -42,7 +48,7 @@
                     else
                     {
                         result = "Note trashed";
-                    }                    
+                    }
                     this.userContext.FundooNotes.Update(note);
                     this.userContext.SaveChanges();
                     return result;
@@ -77,7 +83,7 @@
                 string result = "UNSUCCESS";
                 var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Trash == true).ToList();
                 if (notes.Count != 0)
-                { 
+                {
                     this.userContext.FundooNotes.RemoveRange(notes);
                     this.userContext.SaveChangesAsync();
                     result = "All notes in Trash permanently deleted";
@@ -125,8 +131,8 @@
             this.userContext.SaveChanges();
             string message = "SUCCESS";
             return message;
-            }
-        
+        }
+
 
         public string PinNote(int noteId)
         {
@@ -137,7 +143,7 @@
                 if (note != null)
                 {
                     note.Pin = true;
-                    if(note.Archieve == true)
+                    if (note.Archieve == true)
                     {
                         note.Archieve = false;
                         result = "Note unarchived and pinned";
@@ -294,7 +300,7 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==true && x.Trash == false && x.Archieve == false).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin == true && x.Trash == false && x.Archieve == false).ToList();
                 return notes;
             }
             catch (Exception ex)
@@ -307,7 +313,7 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin==false && x.Trash == false && x.Archieve == false).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Pin == false && x.Trash == false && x.Archieve == false).ToList();
                 return notes;
             }
             catch (Exception ex)
@@ -346,8 +352,44 @@
         {
             try
             {
-                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Reminder !=null && x.Trash==false).ToList();
+                var notes = this.userContext.FundooNotes.Where(x => x.UserId == userId && x.Reminder != null && x.Trash == false).ToList();
                 return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool AddImage(int noteId, IFormFile image)
+        {
+            try
+            {
+                bool result;
+                var note = this.userContext.FundooNotes.Find(noteId);
+                if (note != null)
+                {
+                    Account account = new Account(
+                        configuration["CloudinaryAccount:CloudName"],
+                        configuration["CloudinaryAccount:ApiKey"],
+                        configuration["CloudinaryAccount:ApiSecret"]
+                    );
+                    var path = image.OpenReadStream();
+                    Cloudinary cloudinary = new Cloudinary(account);
+                    ImageUploadParams uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(image.FileName, path)
+                    };
+                    var uploadResult = cloudinary.Upload(uploadParams);
+                    note.Image = uploadResult.Url.ToString();
+                    this.userContext.Entry(note).State = EntityState.Modified;
+                    this.userContext.SaveChanges();
+                    result = true;
+                    return result;
+                }
+
+                result = false;
+                return result;
             }
             catch (Exception ex)
             {

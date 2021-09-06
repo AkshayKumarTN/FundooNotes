@@ -1,5 +1,6 @@
 ﻿namespace FundooNotes.Repository.Interface
 {
+    using Microsoft.AspNetCore.Http;
     using Models;
     using System.Collections.Generic;
 
@@ -18,6 +19,7 @@
         public string SetReminder(int noteId, string reminder);
         public string DeleteReminder(int noteId);
         public string RestoreNote(int noteId);
+        public bool AddImage(int noteId, IFormFile image);
         public List<NotesModel> PinnedNotes(int userId);
         public List<NotesModel> UnPinnedNotes(int userId);
         public List<NotesModel> ArchiveNotes(int userId);

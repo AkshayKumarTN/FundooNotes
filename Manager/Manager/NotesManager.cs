@@ -1,8 +1,10 @@
 ﻿namespace FundooNotes.Manager
 {
     using FundooNotes.Manager.Interface;
+    using Microsoft.AspNetCore.Http;
     using Models;
     using Repository.Interface;
+    using System;
     using System.Collections.Generic;
 
     public class NotesManager : INotesManager
@@ -107,6 +109,18 @@
         {
             List<NotesModel> message = this.notes.ReminderNotes(userId);
             return message;
+        }
+        public bool AddImage(int noteId, IFormFile image)
+        {
+            try
+            {
+                bool message = this.notes.AddImage(noteId, image);
+                return message;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }

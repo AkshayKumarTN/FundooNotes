@@ -1,5 +1,6 @@
 ﻿using FundooNotes.Manager.Interface;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -291,6 +292,32 @@ namespace FundooNotes.Controllers
             else
             {
                 return this.BadRequest(new { success = true, Message = "No Reminder Notes" });
+            }
+        }
+
+        /// <summary>
+        /// AddImage method to add image for Note
+        /// </summary>
+        /// <param name="id">note id</param>
+        /// <param name="image">selected image</param>
+        /// <returns>response data</returns>
+        [HttpPut]
+        [Route("addImage")]
+        public IActionResult AddImage(int noteId, IFormFile image)
+        {
+            try
+            {
+                var result = this.notes.AddImage(noteId, image);
+                if (result == true)
+                {
+                    return this.Ok(new ResponseModel<int>() { Status = true, Message = "Image Added Successfully", Data = noteId });
+                }
+
+                return this.BadRequest(new ResponseModel<int>() { Status = false, Message = "Adding Image Unsuccessfully" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<int>() { Status = false, Message = ex.Message });
             }
         }
     }
