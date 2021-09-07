@@ -14,5 +14,7 @@ namespace FundooNotes.Repository.Interface
         public string CreateLable(LableModel lable);
         public string UpdateLable(LableModel lable);
         public string DeleteLable(int lableId);
+        public IEnumerable<LableModel> GetLableById(int lableId);
+        public IEnumerable<LableModel> RetriveLables(int userId);
     }
 }

@@ -7,11 +7,12 @@
 namespace FundooNotes.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using FundooNotes.Manager.Interface;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    ///[Authorize]
+    [Authorize]
     public class LableController : ControllerBase
     {
         /// <summary>
@@ -100,6 +101,56 @@ namespace FundooNotes.Controllers
             catch (Exception ex)
             {
                 return this.NotFound(new ResponseModel<int>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Method to Retrieve lable By LableID
+        /// </summary>
+        /// <param name="lableId">lable ID</param>
+        /// <returns>API response</returns>
+        [HttpGet]
+        [Route("api/GetLableById")]
+        public IActionResult GetLableById(int lableId)
+        {
+            try
+            {
+                var result = this.lable.GetLableById(lableId);
+                if (result != null)
+                {
+                    return this.Ok(new ResponseModel<IEnumerable<LableModel>>() { Status = true, Message = "Lable Retrieved", Data = result });
+                }
+
+                return this.BadRequest(new ResponseModel<IEnumerable<LableModel>>() { Status = false, Message = "Unable to Retrieve Lable" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<IEnumerable<LableModel>>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Method to Retrieve lables
+        /// </summary>
+        /// <param name="userId">user ID</param>
+        /// <returns>API response</returns>
+        [HttpGet]
+        [Route("api/RetriveLables")]
+        public IActionResult RetriveLables(int userId)
+        {
+            try
+            {
+                var result = this.lable.RetriveLables(userId);
+                if (result != null)
+                {
+                    return this.Ok(new ResponseModel<IEnumerable<LableModel>>() { Status = true, Message = "Lable Retrieved", Data = result });
+                }
+
+                return this.BadRequest(new ResponseModel<IEnumerable<LableModel>>() { Status = false, Message = "Unable to Retrieve Lable" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<IEnumerable<LableModel>>() { Status = false, Message = ex.Message });
             }
         }
     }

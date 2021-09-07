@@ -12,6 +12,8 @@ namespace FundooNotes.Repository.Repository
     using FundooNotes.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     [Authorize]
@@ -95,6 +97,53 @@ namespace FundooNotes.Repository.Repository
                 }
 
                 return "Unable to Delete Lable";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method to get lable by its id
+        /// </summary>
+        /// <param name="id">lable id</param>
+        /// <returns>lable details</returns>
+        public IEnumerable<LableModel> GetLableById(int lableId)
+        {
+            try
+            {
+                IEnumerable<LableModel> result;
+                var lables = this.userContext.Lables.Where(x => x.LableId == lableId);
+                if (lables != null)
+                {
+                    result = lables;
+                    return result;
+                }
+
+                result = null;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IEnumerable<LableModel> RetriveLables(int userId)
+        {
+            try
+            {
+                IEnumerable<LableModel> result;
+                var lables = this.userContext.Lables.Where(x => x.UserId == userId).ToList();
+                if (lables != null)
+                {
+                    result = lables;
+                    return result;
+                }
+
+                result = null;
+                return result;
             }
             catch (Exception ex)
             {

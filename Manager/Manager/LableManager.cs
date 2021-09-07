@@ -38,5 +38,17 @@ namespace FundooNotes.Manager.Manager
             string message = this.lable.DeleteLable(lableId);
             return message;
         }
+
+        public IEnumerable<LableModel> GetLableById(int lableId)
+        {
+            var message = this.lable.GetLableById(lableId);
+            return message;
+        }
+
+        public IEnumerable<LableModel> RetriveLables(int userId)
+        {
+            var message = this.lable.RetriveLables(userId);
+            return message;
+        }
     }
 }
