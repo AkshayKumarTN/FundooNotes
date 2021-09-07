@@ -149,5 +149,24 @@ namespace FundooNotes.Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool DeleteLabelFromUser(int userId, string labelName)
+        {
+            try
+            {
+                var getAllLabels = this.userContext.Lables.Where(x => x.UserId == userId && x.Lable.Equals(labelName)).ToList();
+                if (getAllLabels != null)
+                {
+                    this.userContext.Lables.RemoveRange(getAllLabels);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

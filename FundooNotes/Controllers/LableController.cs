@@ -105,6 +105,31 @@ namespace FundooNotes.Controllers
         }
 
         /// <summary>
+        /// Method to delete lable
+        /// </summary>
+        /// <param name="id">lable id</param>
+        /// <returns>API response</returns>
+        [HttpDelete]
+        [Route("api/DeleteLabelFromUser")]
+        public IActionResult DeleteLabelFromUser(int userId, string labelName)
+        {
+            try
+            {
+                var message = this.lable.DeleteLabelFromUser(userId, labelName);
+                if (message.Equals("Lable Deleted Successfully"))
+                {
+                    return this.Ok(new ResponseModel<int>() { Status = true, Message = "Lable Deleted Successfully");
+                }
+
+                return this.BadRequest(new ResponseModel<int>() { Status = false, Message = "Invalid Lable Name" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<int>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
         /// Method to Retrieve lable By LableID
         /// </summary>
         /// <param name="lableId">lable ID</param>
