@@ -16,7 +16,6 @@ namespace FundooNotes.Repository.Repository
     using System.Linq;
     using System.Web.Mvc;
 
-    [Authorize]
     public class LableRepository : ILableRepository
     {
         private readonly UserContext userContext;

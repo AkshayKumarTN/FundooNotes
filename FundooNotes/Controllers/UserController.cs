@@ -9,13 +9,17 @@ namespace FundooNotes.Controllers
 {
     using System;
     using FundooNotes.Managers.Interface;
-    using Microsoft.AspNetCore.Mvc;    
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// UserController Class
     /// </summary>
     public class UserController : ControllerBase
     {
+        private readonly ILogger<UserController> _logger;
+
+
         /// <summary>
         /// Field 'manager' of type IUserManager
         /// </summary>
@@ -25,9 +29,10 @@ namespace FundooNotes.Controllers
         /// Initializes a new instance of the <see cref="UserController" /> class.
         /// </summary>
         /// <param name="manager">manager parameter for this constructor</param>
-        public UserController(IUserManager manager)
+        public UserController(IUserManager manager, ILogger<UserController> logger)
         {
             this.manager = manager;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -41,13 +46,16 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                _logger.LogInformation("TRYING TO REGISTER !!!");
                 bool result = this.manager.Register(userData);
                 if (result == true)
                 {
+                    _logger.LogInformation("Registration Successfull!!!!");
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Registration Successfull!" });
                 }
                 else
                 {
+                    _logger.LogInformation("Registration Unsuccessfull!!!");
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Registration Unsuccessfull!" });
                 }
             }
@@ -68,14 +76,17 @@ namespace FundooNotes.Controllers
         {
             try
             {
+               _logger.LogInformation("TRYING TO LOGIN !!!");
                 string message = this.manager.Login(userLoginData);
                 if (message.Equals("LOGIN SUCCESS"))
                 {
+                    _logger.LogInformation("LOGIN SUCCESS!!!");
                     string tokenString = this.manager.GenerateToken(userLoginData.Email);
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = message, Data= tokenString });
                 }
                 else
                 {
+                    _logger.LogInformation("LOGIN UNSUCCESS!!!");
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Login Unsuccessfull!" });
                 }
             }
