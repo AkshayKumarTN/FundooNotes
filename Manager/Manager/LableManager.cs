@@ -51,9 +51,9 @@ namespace FundooNotes.Manager.Manager
             return message;
         }
 
-        bool DeleteLabelFromUser(int userId, string labelName)
+        public bool DeleteLabelFromUser(int userId, string labelName)
         {
-            var message = this.lable.DeleteLabelFromUser(userId, labelName)
+            var message = this.lable.DeleteLabelFromUser(userId, labelName);
             return message;
         }
     }

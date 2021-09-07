@@ -104,6 +104,7 @@ namespace FundooNotes.Controllers
             }
         }
 
+       
         /// <summary>
         /// Method to delete lable
         /// </summary>
@@ -118,7 +119,7 @@ namespace FundooNotes.Controllers
                 var message = this.lable.DeleteLabelFromUser(userId, labelName);
                 if (message.Equals("Lable Deleted Successfully"))
                 {
-                    return this.Ok(new ResponseModel<int>() { Status = true, Message = "Lable Deleted Successfully");
+                    return this.Ok(new ResponseModel<int>() { Status = true, Message = "Lable Deleted Successfully", Data = userId });
                 }
 
                 return this.BadRequest(new ResponseModel<int>() { Status = false, Message = "Invalid Lable Name" });

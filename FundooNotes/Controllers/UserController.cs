@@ -11,6 +11,7 @@ namespace FundooNotes.Controllers
     using FundooNotes.Managers.Interface;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using StackExchange.Redis;
 
     /// <summary>
     /// UserController Class
@@ -80,6 +81,20 @@ namespace FundooNotes.Controllers
                 string message = this.manager.Login(userLoginData);
                 if (message.Equals("LOGIN SUCCESS"))
                 {
+                    ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                    IDatabase database = connectionMultiplexer.GetDatabase();
+                    string FirstName = database.StringGet("FirstName");
+                    string LastName = database.StringGet("LastName");
+                    int UserId = Convert.ToInt32(database.StringGet("UserId"));
+
+                    RegisterModel data = new RegisterModel
+                    {
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        UserId = UserId,
+                        Email = userLoginData.Email
+                    };
+
                     _logger.LogInformation("LOGIN SUCCESS!!!");
                     string tokenString = this.manager.GenerateToken(userLoginData.Email);
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = message, Data= tokenString });
