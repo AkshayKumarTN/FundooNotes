@@ -16,8 +16,15 @@ namespace FundooNotes.Repository.Repository
     /// </summary>
     public class CollaboratorRepository : ICollaboratorRepository
     {
+        /// <summary>
+        /// Field userContext of type UserContext
+        /// </summary>
         private readonly UserContext userContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollaboratorRepository" /> class.
+        /// </summary>
+        /// <param name="userContext">UserContext</param>
         public CollaboratorRepository(UserContext userContext)
         {
             this.userContext = userContext;

@@ -18,7 +18,15 @@ namespace FundooNotes.Controllers
     [Authorize]
     public class CollaboratorController : ControllerBase
     {
+        /// <summary>
+        /// Field 'collaboratorManager' of type ICollaboratorManager
+        /// </summary>
         private readonly ICollaboratorManager collaboratorManager;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollaboratorController" /> class.
+        /// </summary>
+        /// <param name="collaboratorManager">ICollaboratorManager</param>
         public CollaboratorController(ICollaboratorManager collaboratorManager)
         {
             this.collaboratorManager = collaboratorManager;

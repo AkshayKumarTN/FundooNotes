@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CollaboratorController.cs" company="Bridgelabz">
+// <copyright file="NotesController.cs" company="Bridgelabz">
 //   Copyright © 2021 Company="BridgeLabz"
 // </copyright>
 // <creator name="Akshay Kumar T N "/>
@@ -16,8 +16,15 @@ namespace FundooNotes.Controllers
     [Authorize]
     public class NotesController : ControllerBase
     {
+        /// <summary>
+        /// Field 'notes' of type INotesManager
+        /// </summary>
         private readonly INotesManager notes;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotesController" /> class.
+        /// </summary>
+        /// <param name="notes">INotesManager</param>
         public NotesController(INotesManager notes)
         {
             this.notes = notes;
@@ -43,7 +50,11 @@ namespace FundooNotes.Controllers
             }
         }
 
-
+        /// <summary>
+        /// DeleteNote
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpDelete]
         [Route("api/DeleteNote")]
         public IActionResult DeleteNote(int noteId)
@@ -59,6 +70,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// DeleteNoteForever
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpDelete]
         [Route("api/DeleteNoteForever")]
         public IActionResult DeleteNoteForever(int noteId)
@@ -74,6 +90,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// EmptyTrash
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpDelete]
         [Route("api/EmptyTrash")]
         public IActionResult EmptyTrash(int userId)
@@ -89,6 +110,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// RestoreNote
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/RestoreNote")]
         public IActionResult RestoreNote(int noteId)
@@ -104,6 +130,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// UpdateNote
+        /// </summary>
+        /// <param name="note">NotesModel</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/UpdateNote")]
         public IActionResult UpdateNote([FromBody] NotesModel note)
@@ -119,6 +150,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// PinNote
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/PinNote")]
         public IActionResult PinNote(int noteId)
@@ -134,6 +170,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// UnPinNote
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/UnPinNote")]
         public IActionResult UnPinNote(int noteId)
@@ -149,6 +190,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Archive
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/Archive")]
         public IActionResult Archive(int noteId)
@@ -164,6 +210,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// UnArchive
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/UnArchive")]
         public IActionResult UnArchive(int noteId)
@@ -179,6 +230,12 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Set NoteColor
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <param name="color">color</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/NoteColor")]
         public IActionResult NoteColor(int noteId, string color)
@@ -194,6 +251,12 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// SetReminder
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <param name="reminder"></param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/SetReminder")]
         public IActionResult SetReminder(int noteId, string reminder)
@@ -209,6 +272,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// DeleteReminder
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/DeleteReminder")]
         public IActionResult DeleteReminder(int noteId)
@@ -224,6 +292,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Get PinnedNotes
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/PinnedNotes")]
         public IActionResult PinnedNotes(int userId)
@@ -239,6 +312,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Get UnPinnedNotes
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/UnPinnedNotes")]
         public IActionResult UnPinnedNotes(int userId)
@@ -254,6 +332,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Get ArchiveNotes
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/ArchiveNotes")]
         public IActionResult ArchiveNotes(int userId)
@@ -269,6 +352,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Get TrashNotes
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/TrashNotes")]
         public IActionResult TrashNotes(int userId)
@@ -284,6 +372,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// GET ReminderNotes
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>response data</returns>
         [HttpPut]
         [Route("api/ReminderNotes")]
         public IActionResult ReminderNotes(int userId)

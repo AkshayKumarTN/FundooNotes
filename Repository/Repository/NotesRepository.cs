@@ -1,4 +1,10 @@
-﻿namespace FundooNotes.Repository.Repository
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="NotesRepository.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Akshay Kumar T N "/>
+// ----------------------------------------------------------------------------------------------------------
+namespace FundooNotes.Repository.Repository
 {
     using System;
     using System.Collections.Generic;
@@ -11,17 +17,37 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 
+    /// <summary>
+    /// NotesRepository Class
+    /// </summary>
     public class NotesRepository : INotesRepository
     {
+        /// <summary>
+        /// Field userContext of type userContext
+        /// </summary>
         private readonly UserContext userContext;
+
+        /// <summary>
+        /// Field configuration of type IConfiguration
+        /// </summary>
         private readonly IConfiguration configuration;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotesRepository" /> class.
+        /// </summary>
+        /// <param name="userContext">UserContext</param>
+        /// <param name="configuration">IConfiguration</param>
         public NotesRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
             this.configuration = configuration;
         }
 
+        /// <summary>
+        /// AddNewNote Method
+        /// </summary>
+        /// <param name="note">NotesModel</param>
+        /// <returns>string</returns>
         public string AddNewNote(NotesModel note)
         {
             this.userContext.FundooNotes.Add(note);
@@ -30,6 +56,11 @@
             return message;
         }
 
+        /// <summary>
+        /// DeleteNote Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string DeleteNote(int noteId)
         {
             try
@@ -62,6 +93,11 @@
 
         }
 
+        /// <summary>
+        /// DeleteNoteForever Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string DeleteNoteForever(int noteId)
         {
             try
@@ -76,6 +112,12 @@
                 throw e;
             }
         }
+
+        /// <summary>
+        /// EmptyTrash Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>string</returns>
         public string EmptyTrash(int userId)
         {
             try
@@ -101,6 +143,11 @@
 
         }
 
+        /// <summary>
+        /// RestoreNote Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string RestoreNote(int noteId)
         {
             try
@@ -122,6 +169,11 @@
 
         }
 
+        /// <summary>
+        /// UpdateNote Method
+        /// </summary>
+        /// <param name="note">NotesModel</param>
+        /// <returns>string</returns>
         public string UpdateNote(NotesModel note)
         {
             if (note.NotesId != 0)
@@ -133,7 +185,11 @@
             return message;
         }
 
-
+        /// <summary>
+        /// PinNote Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string PinNote(int noteId)
         {
             try
@@ -164,6 +220,11 @@
             }
         }
 
+        /// <summary>
+        /// UnPinNote Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string UnPinNote(int noteId)
         {
             try
@@ -184,6 +245,11 @@
             }
         }
 
+        /// <summary>
+        /// Archive Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string Archive(int noteId)
         {
             try
@@ -214,6 +280,11 @@
             }
         }
 
+        /// <summary>
+        /// UnArchive Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string UnArchive(int noteId)
         {
             try
@@ -236,6 +307,12 @@
             }
         }
 
+        /// <summary>
+        /// NoteColor Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <param name="color">color</param>
+        /// <returns>string</returns>
         public string NoteColor(int noteId, string color)
         {
             try
@@ -256,6 +333,12 @@
             }
         }
 
+        /// <summary>
+        /// SetReminder Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <param name="reminder">reminder</param>
+        /// <returns>string</returns>
         public string SetReminder(int noteId, string reminder)
         {
             try
@@ -276,6 +359,11 @@
             }
         }
 
+        /// <summary>
+        /// DeleteReminder Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <returns>string</returns>
         public string DeleteReminder(int noteId)
         {
             try
@@ -296,6 +384,11 @@
             }
         }
 
+        /// <summary>
+        /// PinnedNotes Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>NotesModel List</returns>
         public List<NotesModel> PinnedNotes(int userId)
         {
             try
@@ -309,6 +402,11 @@
             }
         }
 
+        /// <summary>
+        /// UnPinnedNotes Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>NotesModel List</returns>
         public List<NotesModel> UnPinnedNotes(int userId)
         {
             try
@@ -322,6 +420,11 @@
             }
         }
 
+        /// <summary>
+        /// ArchiveNotes Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>NotesModel List</returns>
         public List<NotesModel> ArchiveNotes(int userId)
         {
             try
@@ -335,6 +438,11 @@
             }
         }
 
+        /// <summary>
+        /// TrashNotes Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>NotesModel List</returns>
         public List<NotesModel> TrashNotes(int userId)
         {
             try
@@ -348,6 +456,11 @@
             }
         }
 
+        /// <summary>
+        /// ReminderNotes Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>NotesModel List</returns>
         public List<NotesModel> ReminderNotes(int userId)
         {
             try
@@ -361,6 +474,12 @@
             }
         }
 
+        /// <summary>
+        /// AddImage Method
+        /// </summary>
+        /// <param name="noteId">noteId</param>
+        /// <param name="image">IFormFile</param>
+        /// <returns>boolean</returns>
         public bool AddImage(int noteId, IFormFile image)
         {
             try

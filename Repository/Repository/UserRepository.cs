@@ -221,6 +221,11 @@ namespace FundooNotes.Repository.Repository
             }
         }
 
+        /// <summary>
+        /// GenerateToken Method
+        /// </summary>
+        /// <param name="email">User email</param>
+        /// <returns>GenerateToken String</returns>
         public string GenerateToken(string email)
         {
             byte[] key = Encoding.UTF8.GetBytes(this.configuration["SecretKey"]);

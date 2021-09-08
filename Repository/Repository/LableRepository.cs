@@ -5,7 +5,6 @@
 // <creator name="Akshay Kumar T N "/>
 // ----------------------------------------------------------------------------------------------------------
 
-
 namespace FundooNotes.Repository.Repository
 {
     using FundooNotes.Repository.Context;
@@ -17,10 +16,20 @@ namespace FundooNotes.Repository.Repository
     using System.Linq;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// LableRepository Class
+    /// </summary>
     public class LableRepository : ILableRepository
     {
+        /// <summary>
+        /// Field userContext of type UserContext
+        /// </summary>
         private readonly UserContext userContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LableRepository" /> class.
+        /// </summary>
+        /// <param name="userContext">UserContext</param>
         public LableRepository(UserContext userContext)
         {
             this.userContext = userContext;
@@ -144,6 +153,11 @@ namespace FundooNotes.Repository.Repository
             }
         }
 
+        /// <summary>
+        ///  Retrive Lables Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns>LableModel List</returns>
         public IEnumerable<LableModel> RetriveLables(int userId)
         {
             try
@@ -165,6 +179,12 @@ namespace FundooNotes.Repository.Repository
             }
         }
 
+        /// <summary>
+        /// DeleteLabel From User Method
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <param name="labelName">labelName</param>
+        /// <returns>Returns boolean</returns>
         public bool DeleteLabelFromUser(int userId, string labelName)
         {
             try
