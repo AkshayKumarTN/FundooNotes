@@ -6,6 +6,8 @@
 // ----------------------------------------------------------------------------------------------------------
 namespace FundooNotes
 {
+    using System;
+    using System.Text;
     using FundooNotes.Manager;
     using FundooNotes.Manager.Interface;
     using FundooNotes.Manager.Manager;
@@ -22,7 +24,7 @@ namespace FundooNotes
     using Microsoft.Extensions.Hosting;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using System.Text;
+    
 
     /// <summary>
     /// Startup. cs class. This class is an entry point for asp.net project
@@ -49,6 +51,10 @@ namespace FundooNotes
         /// <param name="services"> Parameter services </param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(4);//You can set Time   
+            });
             services.AddMvc();
             services.AddDbContextPool<UserContext>(
                 option => option.UseSqlServer(this.Configuration.GetConnectionString("UserDbConnection")));
@@ -60,6 +66,7 @@ namespace FundooNotes
             services.AddTransient<ICollaboratorManager, CollaboratorManager>();
             services.AddTransient<ILableRepository, LableRepository>();
             services.AddTransient<ILableManager, LableManager>();
+           
 
             services.AddSwaggerGen(c =>
             {
@@ -129,6 +136,8 @@ namespace FundooNotes
                      
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
             app.UseAuthentication();

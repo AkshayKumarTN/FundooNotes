@@ -9,6 +9,7 @@ namespace FundooNotes.Controllers
 {
     using System;
     using FundooNotes.Managers.Interface;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using StackExchange.Redis;
@@ -25,6 +26,16 @@ namespace FundooNotes.Controllers
         /// Field 'manager' of type IUserManager
         /// </summary>
         private readonly IUserManager manager;
+
+        /// <summary>
+        /// declaring a variable for session name
+        /// </summary>
+        private const string SessionName = "_FullName";
+
+        /// <summary>
+        /// declaring a variable for session email id
+        /// </summary>
+        private const string SessionEmail = "_EmailId";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserController" /> class.
@@ -47,12 +58,16 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                HttpContext.Session.SetString(SessionName, userData.FirstName + " " + userData.LastName);
+                HttpContext.Session.SetString(SessionEmail, userData.Email);
                 _logger.LogInformation("TRYING TO REGISTER !!!");
                 bool result = this.manager.Register(userData);
                 if (result == true)
                 {
+                    string name = HttpContext.Session.GetString(SessionName);
+                    string email = HttpContext.Session.GetString(SessionEmail);
                     _logger.LogInformation("Registration Successfull!!!!");
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Registration Successfull!" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Registration Successfull!", Data = "Session || Name : " + name + "|| Email Id : " + email });
                 }
                 else
                 {
