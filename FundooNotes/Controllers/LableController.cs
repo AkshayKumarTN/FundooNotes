@@ -156,17 +156,18 @@ namespace FundooNotes.Controllers
         }
 
         /// <summary>
-        /// Method to Retrieve lables
+        /// Method to Retrive Lables By LableName 
         /// </summary>
         /// <param name="userId">user ID</param>
+        /// <param name="lableName">lableName</param>
         /// <returns>API response</returns>
         [HttpGet]
         [Route("api/RetriveLables")]
-        public IActionResult RetriveLables(int userId)
+        public IActionResult RetriveLablesByLableName(int userId, string lableName)
         {
             try
             {
-                var result = this.lable.RetriveLables(userId);
+                var result = this.lable.RetriveLablesByLableName(userId, lableName);
                 if (result != null)
                 {
                     return this.Ok(new ResponseModel<IEnumerable<LableModel>>() { Status = true, Message = "Lable Retrieved", Data = result });

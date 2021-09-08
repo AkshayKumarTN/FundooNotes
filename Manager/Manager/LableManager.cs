@@ -76,13 +76,14 @@ namespace FundooNotes.Manager.Manager
         }
 
         /// <summary>
-        /// RetriveLables Method
+        /// Method to Retrive Lables By LableName 
         /// </summary>
         /// <param name="userId">userId</param>
+        /// <param name="lableName">lableName</param>
         /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> RetriveLables(int userId)
+        public IEnumerable<LableModel> RetriveLablesByLableName(int userId, string lableName)
         {
-            var message = this.lable.RetriveLables(userId);
+            var message = this.lable.RetriveLablesByLableName(userId, lableName);
             return message;
         }
 

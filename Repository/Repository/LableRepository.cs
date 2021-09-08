@@ -154,16 +154,17 @@ namespace FundooNotes.Repository.Repository
         }
 
         /// <summary>
-        ///  Retrive Lables Method
+        ///  Method to Retrive Lables By LableName 
         /// </summary>
         /// <param name="userId">userId</param>
+        /// <param name="lableName">lableName</param>
         /// <returns>LableModel List</returns>
-        public IEnumerable<LableModel> RetriveLables(int userId)
+        public IEnumerable<LableModel> RetriveLablesByLableName(int userId, string lableName)
         {
             try
             {
                 IEnumerable<LableModel> result;
-                var lables = this.userContext.Lables.Where(x => x.UserId == userId).ToList();
+                var lables = this.userContext.Lables.Where(x => x.UserId == userId && x.Lable == lableName).ToList();
                 if (lables != null)
                 {
                     result = lables;

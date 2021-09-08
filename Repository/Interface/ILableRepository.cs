@@ -40,15 +40,16 @@ namespace FundooNotes.Repository.Interface
         /// GetLableById Method Declaration
         /// </summary>
         /// <param name="lableId">lableId</param>
+        /// <param name="lableName">lableName</param>
         /// <returns>LableModel</returns>
         public IEnumerable<LableModel> GetLableById(int lableId);
 
         /// <summary>
-        /// RetriveLables Method Declaration
+        /// RetriveLablesByLableName Method Declaration
         /// </summary>
         /// <param name="userId">userId</param>
         /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> RetriveLables(int userId);
+        public IEnumerable<LableModel> RetriveLablesByLableName(int userId, string lableName);
 
         /// <summary>
         /// DeleteLabelFromUser Method Declaration
