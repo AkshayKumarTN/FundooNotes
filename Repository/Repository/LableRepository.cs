@@ -79,23 +79,35 @@ namespace FundooNotes.Repository.Repository
         }
 
         /// <summary>
-        /// Method to Delete Lable
+        /// Method to Remove Lable
         /// </summary>
         /// <param name="id">lable id</param>
         /// <returns>string message</returns>
-        public string DeleteLable(int lableId)
+        public string RemoveLable(int lableId)
         {
             try
             {
                 if (lableId > 0)
                 {
                     var lable = this.userContext.Lables.Find(lableId);
-                    this.userContext.Lables.Remove(lable);
-                    this.userContext.SaveChangesAsync();
-                    return "Lable Deleted Successfully";
+                    var result = this.userContext.Lables.Where(x => x.UserId == lable.UserId && x.NotesId == null && x.Lable == lable.Lable).ToList();
+                    if (result.Count > 0)
+                    {
+                        this.userContext.Lables.Remove(lable);
+                        this.userContext.SaveChangesAsync();
+                        return "Lable Removed Successfully";
+                    }
+                    else
+                    {
+                        lable.NotesId = null;
+                        this.userContext.Entry(lable).State = EntityState.Modified;
+                        this.userContext.SaveChanges();
+                        return "Lable Removed Successfully";
+
+                    }
                 }
 
-                return "Unable to Delete Lable";
+                return "Unable to Removed Lable";
             }
             catch (Exception ex)
             {

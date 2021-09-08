@@ -12,7 +12,7 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize]
+    ///[Authorize]
     public class LableController : ControllerBase
     {
         /// <summary>
@@ -90,8 +90,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                var message = this.lable.DeleteLable(lableId);
-                if (message.Equals("Lable Deleted Successfully"))
+                var message = this.lable.RemoveLable(lableId);
+                if (message.Equals("Lable Removed Successfully"))
                 {
                     return this.Ok(new ResponseModel<int>() { Status = true, Message = message, Data = lableId });
                 }

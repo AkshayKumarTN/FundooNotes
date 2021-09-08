@@ -33,9 +33,9 @@ namespace FundooNotes.Manager.Manager
             return message;
         }
 
-        public string DeleteLable(int lableId)
+        public string RemoveLable(int lableId)
         {
-            string message = this.lable.DeleteLable(lableId);
+            string message = this.lable.RemoveLable(lableId);
             return message;
         }
 
