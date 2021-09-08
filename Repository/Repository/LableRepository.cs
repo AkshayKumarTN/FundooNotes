@@ -11,6 +11,7 @@ namespace FundooNotes.Repository.Repository
     using FundooNotes.Repository.Context;
     using FundooNotes.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -57,20 +58,22 @@ namespace FundooNotes.Repository.Repository
         /// </summary>
         /// <param name="lable">lable parameter</param>
         /// <returns>string message</returns>
-        public string UpdateLable(LableModel lable)
+        public string UpdateLable(EditLabelsModel lable)
         {
             try
             {
-                string message;
-                if (lable.LableId != 0)
+                var lableList = this.userContext.Lables.Where(x => x.Lable == lable.LableName && x.UserId == lable.UserId).ToList();
+                if (lableList.Count > 0)
                 {
-                    this.userContext.Entry(lable).State = EntityState.Modified;
+                    foreach (var i in lableList)
+                    {
+                        i.Lable = lable.NewLableName;
+                    }
                     this.userContext.SaveChanges();
-                    message = "Lable updated Successfully";
-                    return message;
+                    return "Lable updated Successfully";
                 }
 
-                return message = "Lable update Unsuccessfully";
+                return "Lable update Unsuccessfully";
             }
             catch (Exception ex)
             {

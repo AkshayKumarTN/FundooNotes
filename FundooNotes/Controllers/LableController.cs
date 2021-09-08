@@ -12,7 +12,7 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    ///[Authorize]
+    [Authorize]
     public class LableController : ControllerBase
     {
         /// <summary>
@@ -61,21 +61,21 @@ namespace FundooNotes.Controllers
         /// <returns>API response</returns>
         [HttpPut]
         [Route("api/UpdateLable")]
-        public IActionResult UpdateLable([FromBody] LableModel lable)
+        public IActionResult UpdateLable([FromBody] EditLabelsModel lable)
         {
             try
             {
                 var message = this.lable.UpdateLable(lable);
                 if (message.Equals("Lable updated Successfully"))
                 {
-                    return this.Ok(new ResponseModel<LableModel>() { Status = true, Message = message, Data = lable });
+                    return this.Ok(new ResponseModel<EditLabelsModel>() { Status = true, Message = message, Data = lable });
                 }
 
-                return this.BadRequest(new ResponseModel<LableModel>() { Status = false, Message = message });
+                return this.BadRequest(new ResponseModel<EditLabelsModel>() { Status = false, Message = message });
             }
             catch (Exception ex)
             {
-                return this.NotFound(new ResponseModel<LableModel>() { Status = false, Message = ex.Message });
+                return this.NotFound(new ResponseModel<EditLabelsModel>() { Status = false, Message = ex.Message });
             }
         }
 
