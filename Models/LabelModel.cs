@@ -1,33 +1,29 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LableModel.cs" company="Bridgelabz">
+// <copyright file="LabelModel.cs" company="Bridgelabz">
 //   Copyright © 2021 Company="BridgeLabz"
 // </copyright>
 // <creator name="Akshay Kumar T N "/>
 // ----------------------------------------------------------------------------------------------------------
 namespace FundooNotes
 {
-    using FundooNotes;
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Text;
 
     /// <summary>
-    /// LableModel Class
+    /// LabelModel Class
     /// </summary>
-    public class LableModel
+    public class LabelModel
     {
         /// <summary>
-        /// Gets or sets Field 'LableId' of type integer
+        /// Gets or sets Field 'LabelId' of type integer
         /// </summary>
         [Key]
-        public int LableId { get; set; }
+        public int LabelId { get; set; }
 
         /// <summary>
-        /// Gets or sets Field 'Lable' of type string
+        /// Gets or sets Field 'Label' of type string
         /// </summary>
-        public string Lable { get; set; }
+        public string LabelName { get; set; }
 
         /// <summary>
         /// Gets or sets Field 'UserId' of type integer
@@ -41,10 +37,10 @@ namespace FundooNotes
         public virtual RegisterModel RegisterModel { get; set; }
 
         /// <summary>
-        /// Gets or sets Field 'NotesId' of type integer
+        /// Gets or sets Field 'NoteId' of type integer
         /// </summary>
         [ForeignKey("NotesModel")]
-        public int? NotesId { get; set; }
+        public int? NoteId { get; set; }
 
         /// <summary>
         /// Gets or sets Field 'NotesModel' of type NotesModel

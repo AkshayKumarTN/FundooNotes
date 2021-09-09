@@ -15,75 +15,74 @@ namespace FundooNotes.Manager.Manager
     /// <summary>
     /// LableManager class implements ILableManager interface
     /// </summary>
-    public class LableManager : ILableManager
+    public class LabelManager : ILabelManager
     {
         /// <summary>
-        /// lable reference variable of type ILableRepository
+        /// label reference variable of type ILableRepository
         /// </summary>
-        private readonly ILableRepository lable;
+        private readonly ILabelRepository label;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LableManager" /> class.
+        /// Initializes a new instance of the <see cref="LabelManager" /> class.
         /// </summary>
-        /// <param name="lable">ILableRepository</param>
-        public LableManager(ILableRepository lable)
+        /// <param name="label">ILableRepository</param>
+        public LabelManager(ILabelRepository label)
         {
-            this.lable = lable;
+            this.label = label;
         }
 
         /// <summary>
-        /// CreateLable Method
+        /// CreateLabel Method
         /// </summary>
-        /// <param name="lable">EditLabelsModel</param>
+        /// <param name="label">LabelModel</param>
         /// <returns></returns>
-        public string CreateLable(LableModel lable)
+        public string CreateLabel(LabelModel label)
         {
-            string message = this.lable.CreateLable(lable);
+            string message = this.label.CreateLabel(label);
             return message;
         }
 
         /// <summary>
-        /// UpdateLable Method
+        /// UpdateLabel Method
         /// </summary>
-        /// <param name="lable">EditLabelsModel</param>
+        /// <param name="label">LabelModel</param>
         /// <returns>string</returns>
-        public string UpdateLable(EditLabelsModel lable)
+        public string UpdateLabel(LabelModel label)
         {
-            string message = this.lable.UpdateLable(lable);
+            string message = this.label.UpdateLabel(label);
             return message;
         }
 
         /// <summary>
-        /// RemoveLable Method
+        /// RemoveLabel Method
         /// </summary>
-        /// <param name="lableId">lableId</param>
+        /// <param name="labelId">labelId</param>
         /// <returns>string</returns>
-        public string RemoveLable(int lableId)
+        public string RemoveLabel(int labelId)
         {
-            string message = this.lable.RemoveLable(lableId);
+            string message = this.label.RemoveLabel(labelId);
             return message;
         }
 
         /// <summary>
-        /// GetLableById Method
-        /// </summary>
-        /// <param name="lableId">lableId</param>
-        /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> GetLableById(int lableId)
-        {
-            var message = this.lable.GetLableById(lableId);
-            return message;
-        }
-
-        /// <summary>
-        /// Method to Retrive Lables By LableName 
+        /// GetLabelById Method
         /// </summary>
         /// <param name="userId">userId</param>
-        /// <param name="lableName">lableName</param>
-        /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> RetriveLablesByLableName(int userId, string lableName)
+        /// <returns>LabelModel</returns>
+        public IEnumerable<LabelModel> GetLabelById(int userId)
         {
-            var message = this.lable.RetriveLablesByLableName(userId, lableName);
+            var message = this.label.GetLabelById(userId);
+            return message;
+        }
+
+        /// <summary>
+        /// Method to get Notes of Same lableName by its lableId
+        /// </summary>
+        /// <param name="lableId">label id</param>
+        /// <returns>Notes</returns>
+        public IEnumerable<NotesModel> RetriveNotesByLabelId(int lableId)
+        {
+            var message = this.label.RetriveNotesByLabelId(lableId);
             return message;
         }
 
@@ -95,7 +94,7 @@ namespace FundooNotes.Manager.Manager
         /// <returns>boolean</returns>
         public bool DeleteLabelFromUser(int userId, string labelName)
         {
-            var message = this.lable.DeleteLabelFromUser(userId, labelName);
+            var message = this.label.DeleteLabelFromUser(userId, labelName);
             return message;
         }
     }

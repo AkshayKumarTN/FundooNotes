@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class FundooNote : Migration
+    public partial class FundooWork : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,7 @@ namespace Repository.Migrations
                 name: "FundooNotes",
                 columns: table => new
                 {
-                    NotesId = table.Column<int>(nullable: false)
+                    NoteId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -34,7 +34,7 @@ namespace Repository.Migrations
                     Collaborator = table.Column<string>(nullable: true),
                     Color = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Lable = table.Column<string>(nullable: true),
+                    Label = table.Column<string>(nullable: true),
                     Pin = table.Column<bool>(nullable: false),
                     Archieve = table.Column<bool>(nullable: false),
                     Trash = table.Column<bool>(nullable: false),
@@ -42,7 +42,7 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FundooNotes", x => x.NotesId);
+                    table.PrimaryKey("PK_FundooNotes", x => x.NoteId);
                     table.ForeignKey(
                         name: "FK_FundooNotes_Users_UserId",
                         column: x => x.UserId,
@@ -68,31 +68,31 @@ namespace Repository.Migrations
                         name: "FK_Collaborators_FundooNotes_NoteId",
                         column: x => x.NoteId,
                         principalTable: "FundooNotes",
-                        principalColumn: "NotesId",
+                        principalColumn: "NoteId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lables",
+                name: "Labels",
                 columns: table => new
                 {
-                    LableId = table.Column<int>(nullable: false)
+                    LabelId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Lable = table.Column<string>(nullable: true),
+                    LabelName = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
-                    NotesId = table.Column<int>(nullable: true)
+                    NoteId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lables", x => x.LableId);
+                    table.PrimaryKey("PK_Labels", x => x.LabelId);
                     table.ForeignKey(
-                        name: "FK_Lables_FundooNotes_NotesId",
-                        column: x => x.NotesId,
+                        name: "FK_Labels_FundooNotes_NoteId",
+                        column: x => x.NoteId,
                         principalTable: "FundooNotes",
-                        principalColumn: "NotesId",
+                        principalColumn: "NoteId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Lables_Users_UserId",
+                        name: "FK_Labels_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -110,13 +110,13 @@ namespace Repository.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lables_NotesId",
-                table: "Lables",
-                column: "NotesId");
+                name: "IX_Labels_NoteId",
+                table: "Labels",
+                column: "NoteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lables_UserId",
-                table: "Lables",
+                name: "IX_Labels_UserId",
+                table: "Labels",
                 column: "UserId");
         }
 
@@ -126,7 +126,7 @@ namespace Repository.Migrations
                 name: "Collaborators");
 
             migrationBuilder.DropTable(
-                name: "Lables");
+                name: "Labels");
 
             migrationBuilder.DropTable(
                 name: "FundooNotes");

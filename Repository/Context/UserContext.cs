@@ -45,8 +45,8 @@ namespace FundooNotes.Repository.Context
         public DbSet<CollaboratorsModel> Collaborators { get; set; }
 
         /// <summary>
-        /// Gets or sets Field 'Lables' of type DataBaseSet
+        /// Gets or sets Field 'Labels' of type DataBaseSet
         /// </summary>
-        public DbSet<LableModel> Lables { get; set; }
+        public DbSet<LabelModel> Labels { get; set; }
     }
 }

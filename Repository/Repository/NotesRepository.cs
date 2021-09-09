@@ -66,7 +66,7 @@ namespace FundooNotes.Repository.Repository
             try
             {
                 string result = "UNSUCCESS";
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Trash = true;
@@ -152,7 +152,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Trash = false;
@@ -176,7 +176,7 @@ namespace FundooNotes.Repository.Repository
         /// <returns>string</returns>
         public string UpdateNote(NotesModel note)
         {
-            if (note.NotesId != 0)
+            if (note.NoteId != 0)
             {
                 userContext.Entry(note).State = EntityState.Modified;
             }
@@ -195,7 +195,7 @@ namespace FundooNotes.Repository.Repository
             try
             {
                 string result = "UNSUCCESS";
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Pin = true;
@@ -229,7 +229,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Pin = false;
@@ -255,7 +255,7 @@ namespace FundooNotes.Repository.Repository
             try
             {
                 string result = "UNSUCCESS";
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Archieve = true;
@@ -290,7 +290,7 @@ namespace FundooNotes.Repository.Repository
             try
             {
                 string result = "UNSUCCESS";
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Archieve = false;
@@ -317,7 +317,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Color = color;
@@ -343,7 +343,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Reminder = reminder;
@@ -368,7 +368,7 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                var note = this.userContext.FundooNotes.Where(x => x.NotesId == noteId).SingleOrDefault();
+                var note = this.userContext.FundooNotes.Where(x => x.NoteId == noteId).SingleOrDefault();
                 if (note != null)
                 {
                     note.Reminder = null;

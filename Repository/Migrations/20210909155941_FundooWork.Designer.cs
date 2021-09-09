@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Repository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210906125355_FundooNote")]
-    partial class FundooNote
+    [Migration("20210909155941_FundooWork")]
+    partial class FundooWork
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,34 +44,34 @@ namespace Repository.Migrations
                     b.ToTable("Collaborators");
                 });
 
-            modelBuilder.Entity("FundooNotes.LableModel", b =>
+            modelBuilder.Entity("FundooNotes.LabelModel", b =>
                 {
-                    b.Property<int>("LableId")
+                    b.Property<int>("LabelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Lable")
+                    b.Property<string>("LabelName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NotesId")
+                    b.Property<int?>("NoteId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("LableId");
+                    b.HasKey("LabelId");
 
-                    b.HasIndex("NotesId");
+                    b.HasIndex("NoteId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Lables");
+                    b.ToTable("Labels");
                 });
 
             modelBuilder.Entity("FundooNotes.NotesModel", b =>
                 {
-                    b.Property<int>("NotesId")
+                    b.Property<int>("NoteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -91,7 +91,7 @@ namespace Repository.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Lable")
+                    b.Property<string>("Label")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Pin")
@@ -109,7 +109,7 @@ namespace Repository.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("NotesId");
+                    b.HasKey("NoteId");
 
                     b.HasIndex("UserId");
 
@@ -153,11 +153,11 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FundooNotes.LableModel", b =>
+            modelBuilder.Entity("FundooNotes.LabelModel", b =>
                 {
                     b.HasOne("FundooNotes.NotesModel", "NotesModel")
                         .WithMany()
-                        .HasForeignKey("NotesId");
+                        .HasForeignKey("NoteId");
 
                     b.HasOne("FundooNotes.RegisterModel", "RegisterModel")
                         .WithMany()

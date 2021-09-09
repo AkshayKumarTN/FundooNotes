@@ -16,10 +16,10 @@ namespace FundooNotes
     public class NotesModel
     {
         /// <summary>
-        /// Gets or sets Field 'NotesId' of type integer
+        /// Gets or sets Field 'NoteId' of type integer
         /// </summary>
         [Key]
-        public int NotesId { get; set; }
+        public int NoteId { get; set; }
                
         /// <summary>
         /// Gets or sets Field 'Title' of type string
@@ -52,9 +52,9 @@ namespace FundooNotes
         public string Image { get; set; }
 
         /// <summary>
-        /// Gets or sets Field 'Lable' of type string
+        /// Gets or sets Field 'Label' of type string
         /// </summary>
-        public string Lable { get; set; }
+        public string Label { get; set; }
 
         /// <summary>
         /// Gets or sets Field 'Pin' of type Boolean

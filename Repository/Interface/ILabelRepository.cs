@@ -13,43 +13,42 @@ namespace FundooNotes.Repository.Interface
     /// <summary>
     /// ILableRepository interface
     /// </summary>
-    public interface ILableRepository
+    public interface ILabelRepository
     {
         /// <summary>
-        /// CreateLable Method Declaration
+        /// CreateLabel Method Declaration
         /// </summary>
-        /// <param name="lable">LableModel</param>
+        /// <param name="label">LabelModel</param>
         /// <returns>string</returns>
-        public string CreateLable(LableModel lable);
+        public string CreateLabel(LabelModel label);
 
         /// <summary>
-        /// UpdateLable Method Declaration
+        /// UpdateLabel Method Declaration
         /// </summary>
-        /// <param name="lable">EditLabelsModel</param>
+        /// <param name="label">LabelModel</param>
         /// <returns>string</returns>
-        public string UpdateLable(EditLabelsModel lable);
+        public string UpdateLabel(LabelModel label);
 
         /// <summary>
-        /// RemoveLable Method Declaration
+        /// RemoveLabel Method Declaration
         /// </summary>
-        /// <param name="lableId">lableId</param>
+        /// <param name="labelId">labelId</param>
         /// <returns>string</returns>
-        public string RemoveLable(int lableId);
+        public string RemoveLabel(int labelId);
 
         /// <summary>
-        /// GetLableById Method Declaration
-        /// </summary>
-        /// <param name="lableId">lableId</param>
-        /// <param name="lableName">lableName</param>
-        /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> GetLableById(int lableId);
-
-        /// <summary>
-        /// RetriveLablesByLableName Method Declaration
+        /// GetLabelById Method Declaration
         /// </summary>
         /// <param name="userId">userId</param>
-        /// <returns>LableModel</returns>
-        public IEnumerable<LableModel> RetriveLablesByLableName(int userId, string lableName);
+        /// <returns>LabelModel</returns>
+        public IEnumerable<LabelModel> GetLabelById(int userId);
+
+        /// <summary>
+        /// Method to get Notes of Same lableName by its lableId
+        /// </summary>
+        /// <param name="lableId">label id</param>
+        /// <returns>Notes</returns>
+        public IEnumerable<NotesModel> RetriveNotesByLabelId(int lableId);
 
         /// <summary>
         /// DeleteLabelFromUser Method Declaration
