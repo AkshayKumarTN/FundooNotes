@@ -46,7 +46,7 @@ namespace FundooNotes.Repository.Repository
                 string message;
                 if (label.NoteId == null)
                 {
-                    var result = this.userContext.Labels.Where(x => x.LabelName == label.LabelName && x.UserId == label.UserId);
+                    var result = this.userContext.Labels.Where(x => x.LabelName == label.LabelName && x.UserId == label.UserId && x.NoteId == null).SingleOrDefault();
                     if (result == null)
                     {
                         this.userContext.Labels.Add(label);
@@ -59,13 +59,14 @@ namespace FundooNotes.Repository.Repository
                 }
                 else
                 {
-                    var result = this.userContext.Labels.Where(x => x.LabelName == label.LabelName && x.UserId == label.UserId && x.NoteId == label.NoteId);                   
+                    var result = this.userContext.Labels.Where(x => x.LabelName == label.LabelName && x.UserId == label.UserId && x.NoteId == label.NoteId).SingleOrDefault();                   
                     
                     if (result == null)
                     {
                         this.userContext.Labels.Add(label);
                         this.userContext.SaveChanges();
                         label.NoteId = null;
+                        label.LabelId = 0;
                         this.userContext.Labels.Add(label);
                         this.userContext.SaveChanges();
                         message = "New Label added Successfully";
@@ -91,7 +92,7 @@ namespace FundooNotes.Repository.Repository
             try
             {
 
-                var result1 = this.userContext.Labels.Where(x => x.UserId == Label.UserId && x.LabelId == Label.LabelId).SingleOrDefault();
+                var result1 = this.userContext.Labels.Where(x => x.UserId == Label.UserId && x.LabelId == Label.LabelId && x.NoteId == null).SingleOrDefault();
                 var labelList = this.userContext.Labels.Where(x => x.LabelName == result1.LabelName && x.UserId == result1.UserId).ToList();
                 var result2 = this.userContext.Labels.Where(x => x.LabelName == Label.LabelName && x.UserId == Label.UserId && x.NoteId == null).SingleOrDefault();
                 if (labelList.Count > 0)
@@ -183,20 +184,17 @@ namespace FundooNotes.Repository.Repository
             {
                 IEnumerable<NotesModel> result;
                 var lable = this.userContext.Labels.Where(x => x.LabelId == lableId).SingleOrDefault();
-                if (lable != null)
+                var labeledNotes = (from n in this.userContext.FundooNotes
+                                    join l in this.userContext.Labels
+                                    on n.NoteId equals l.NoteId
+                                    where l.LabelName == lable.LabelName && l.UserId == lable.UserId
+                                    select n).ToList();
+                if (labeledNotes.Count > 0)
                 {
-                    var matchingLables = from newlable in userContext.Labels
-                                         join user in userContext.Users on lable.LabelId equals user.UserId
-                                         join notes in userContext.FundooNotes on lable.NoteId equals notes.NoteId
-                                         where lable.LabelName == notes.Label
-                                         select notes.NoteId;
-                    var lables = userContext.FundooNotes.Where(x => x.Label == lable.LabelName);
-                    result = lables;
-                    return result;
+                    return labeledNotes;
                 }
 
-                result = null;
-                return result;
+                return null;
             }
             catch (Exception ex)
             {

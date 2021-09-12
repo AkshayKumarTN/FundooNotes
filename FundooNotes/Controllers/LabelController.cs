@@ -117,7 +117,7 @@ namespace FundooNotes.Controllers
             try
             {
                 var message = this.Label.DeleteLabelFromUser(userId, labelName);
-                if (message.Equals("Label Deleted Successfully"))
+                if (message == true)
                 {
                     return this.Ok(new ResponseModel<int>() { Status = true, Message = "Label Deleted Successfully", Data = userId });
                 }
