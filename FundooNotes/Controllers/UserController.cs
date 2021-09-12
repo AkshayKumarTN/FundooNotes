@@ -53,7 +53,7 @@ namespace FundooNotes.Controllers
         /// <param name="userData"> RegisterModel Data </param>
         /// <returns> Response with Status And Message </returns>
         [HttpPost]
-        [Route("api/register")]
+        [Route("api/Register")]
         public IActionResult Register([FromBody] RegisterModel userData)
         {
             try

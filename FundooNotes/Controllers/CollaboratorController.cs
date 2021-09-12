@@ -38,7 +38,7 @@ namespace FundooNotes.Controllers
         /// <param name="collaboraters"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/AddCollaborator")]
+        [Route("api/Collaborator")]
         public IActionResult AddCollaborator([FromBody] CollaboratorsModel collaboraters)
         {
             try
@@ -64,7 +64,7 @@ namespace FundooNotes.Controllers
         /// <param name="id">note id</param>
         /// <returns>response data</returns>
         [HttpDelete]
-        [Route("api/RemoveCollaborator")]
+        [Route("api/Collaborator")]
         public IActionResult RemoveCollaborator(int collaboratorId)
         {
             try
@@ -88,7 +88,7 @@ namespace FundooNotes.Controllers
         /// </summary>
         /// <returns>response data</returns>
         [HttpGet]
-        [Route("RetrieveAllCollaborator")]
+        [Route("Collaborator")]
         public IActionResult RetrieveAllCollaborator()
         {
             try

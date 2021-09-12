@@ -36,7 +36,7 @@ namespace FundooNotes.Controllers
         /// <param name="notes">new notes</param>
         /// <returns>response data</returns>
         [HttpPost]
-        [Route("api/AddNewNote")]
+        [Route("api/NewNote")]
         public IActionResult AddNewNote([FromBody] NotesModel notes)
         {
             var result = this.notes.AddNewNote(notes);
@@ -56,7 +56,7 @@ namespace FundooNotes.Controllers
         /// <param name="noteId">noteId</param>
         /// <returns>response data</returns>
         [HttpDelete]
-        [Route("api/DeleteNote")]
+        [Route("api/NoteTrash")]
         public IActionResult DeleteNote(int noteId)
         {
             var result = this.notes.DeleteNote(noteId);
@@ -76,7 +76,7 @@ namespace FundooNotes.Controllers
         /// <param name="noteId">noteId</param>
         /// <returns>response data</returns>
         [HttpDelete]
-        [Route("api/DeleteNoteForever")]
+        [Route("api/Note")]
         public IActionResult DeleteNoteForever(int noteId)
         {
             var result = this.notes.DeleteNoteForever(noteId);
