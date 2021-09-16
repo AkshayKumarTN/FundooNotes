@@ -17,6 +17,8 @@ namespace FundooNotes.Controllers
     /// <summary>
     /// UserController Class
     /// </summary>
+    [ApiController]
+    [Route("api/[controller]")]    
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
@@ -53,7 +55,7 @@ namespace FundooNotes.Controllers
         /// <param name="userData"> RegisterModel Data </param>
         /// <returns> Response with Status And Message </returns>
         [HttpPost]
-        [Route("api/Register")]
+        [Route("Register")]
         public IActionResult Register([FromBody] RegisterModel userData)
         {
             try
@@ -87,7 +89,7 @@ namespace FundooNotes.Controllers
         /// <param name="userLoginData"> LoginModel Data</param>
         /// <returns> Response with Message </returns>
         [HttpPost]
-        [Route("api/Login")]
+        [Route("Login")]
         public IActionResult Login([FromBody] LoginModel userLoginData)
         {
             try
@@ -132,7 +134,7 @@ namespace FundooNotes.Controllers
         /// <param name="email"> User Email </param>
         /// <returns> Response with Status And Message </returns>
         [HttpPost]
-        [Route("api/ForgotPassword")]
+        [Route("ForgotPassword")]
         public IActionResult ForgotPassword(string email)
         {
             try
@@ -159,7 +161,7 @@ namespace FundooNotes.Controllers
         /// <param name="resetPasswordData"> ResetPasswordModel Data </param>
         /// <returns> Response with Status And Message </returns>
         [HttpPut]
-        [Route("api/ResetPassword")]
+        [Route("ResetPassword")]
         public IActionResult ResetPassword([FromBody] ResetPasswordModel resetPasswordData)
         {
             try

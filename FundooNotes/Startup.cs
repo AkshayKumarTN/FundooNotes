@@ -66,7 +66,13 @@ namespace FundooNotes
             services.AddTransient<ICollaboratorManager, CollaboratorManager>();
             services.AddTransient<ILabelRepository, LabelRepository>();
             services.AddTransient<ILabelManager, LabelManager>();
-           
+
+            services.AddCors(options => options.AddPolicy("AllowAllHeaders", builder =>
+            {
+                builder.AllowAnyOrigin()                
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
 
             services.AddSwaggerGen(c =>
             {
@@ -133,7 +139,8 @@ namespace FundooNotes
                 //// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-                     
+
+            app.UseCors("AllowAllHeaders");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
