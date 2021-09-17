@@ -139,10 +139,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                bool result = this.manager.ForgotPassword(email);
-                if (result == true)
+                string result = this.manager.ForgotPassword(email);
+                if (result != null)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Please check the Mail!" });
+                    return this.Ok(new { Status = true, Message = "Please check the Mail!", Data = result, email });
                 }
                 else
                 {

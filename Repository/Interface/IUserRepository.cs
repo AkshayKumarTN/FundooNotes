@@ -29,8 +29,8 @@ namespace FundooNotes.Repository.Interface
         /// Forgot password method Declaration
         /// </summary>
         /// <param name="email">email string</param>
-        /// <returns>boolean result</returns>
-        public bool ForgotPassword(string email);
+        /// <returns>string result</returns>
+        public string ForgotPassword(string email);
 
         /// <summary>
         /// Reset Password Method Declaration

@@ -118,23 +118,23 @@ namespace FundooNotes.Repository.Repository
         {
             try
             {
-                    string message;
-                    string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
-                    var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
+                 string message;
+                 string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
+                 var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
                     
                 if (loginUser != null)
-                    {
+                {
                     ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
                     IDatabase database = connectionMultiplexer.GetDatabase();
                     database.StringSet(key: "FirstName", loginUser.FirstName);
                     database.StringSet(key: "LastName", loginUser.LastName);
                     database.StringSet(key: "UserId", loginUser.UserId.ToString());
                     message = "LOGIN SUCCESS";
-                    }
-                    else
-                    {
+                }
+                else
+                {
                     message = "LOGIN UNSUCCESSFUL, Email Or Password is Wrong";
-                    }
+                }
 
                     return message;
             }
@@ -148,13 +148,16 @@ namespace FundooNotes.Repository.Repository
         /// Method to generate token for given User Email
         /// </summary>
         /// <param name="email">>User Email address</param>
-        /// <returns>boolean result</returns>
-        public bool ForgotPassword(string email)
+        /// <returns>string result</returns>
+        public string ForgotPassword(string email)
         {
             try
-            {
-
-                    var url = "Click on following link to reset your credentials for Fundoonotes App: Link";
+            {                                
+                var userCheck = this.userContext.Users.Where(x => x.Email == email).FirstOrDefault();
+                if (userCheck != null)
+                {
+                    var token = GenerateToken(email);
+                    var url = "Click on following link to reset your credentials for Fundoonotes App: Link : http://localhost:4200/resetPassword/" +token;
                     MessageQueue msmqQueue = new MessageQueue();
                     if (MessageQueue.Exists(@".\Private$\MyQueue"))
                     {
@@ -175,18 +178,14 @@ namespace FundooNotes.Repository.Repository
                     var receiving = receiver.Receive();
                     receiving.Formatter = new BinaryMessageFormatter();
                     string messageBody = receiving.Body.ToString();
-
-                    var userCheck = this.userContext.Users.Where(x => x.Email == email).FirstOrDefault();
-                if (userCheck != null)
-                {
-                    if(SendMail(email, messageBody) ==true)
+                    if (SendMail(email, messageBody) ==true)
                     {
-                        return true;
+                        return token;
                     }    
-                    return false;
+                    return null;
                 }
 
-                return false;
+                return null;
             }
             catch (Exception ex)
             {

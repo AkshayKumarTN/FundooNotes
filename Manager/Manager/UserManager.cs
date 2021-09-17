@@ -67,8 +67,8 @@ namespace FundooNotes.Manager
         /// Forgot password Method 
         /// </summary>
         /// <param name="email">email string parameter</param>
-        /// <returns>boolean result</returns>
-        public bool ForgotPassword(string email)
+        /// <returns>string result</returns>
+        public string ForgotPassword(string email)
         {
             try
             {
