@@ -121,14 +121,15 @@ namespace FundooNotes.Repository.Repository
                     string message;
                     string encodedPassword = EncodePasswordToBase64(userLoginData.Password);
                     var loginUser = this.userContext.Users.Where(x => x.Email == userLoginData.Email && x.Password == encodedPassword).FirstOrDefault();
+                    
+                if (loginUser != null)
+                    {
                     ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
                     IDatabase database = connectionMultiplexer.GetDatabase();
                     database.StringSet(key: "FirstName", loginUser.FirstName);
                     database.StringSet(key: "LastName", loginUser.LastName);
                     database.StringSet(key: "UserId", loginUser.UserId.ToString());
-                if (loginUser != null)
-                    {
-                        message = "LOGIN SUCCESS";
+                    message = "LOGIN SUCCESS";
                     }
                     else
                     {
