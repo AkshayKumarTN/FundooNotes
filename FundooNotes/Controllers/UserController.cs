@@ -114,7 +114,7 @@ namespace FundooNotes.Controllers
 
                     _logger.LogInformation("LOGIN SUCCESS!!!");
                     string tokenString = this.manager.GenerateToken(userLoginData.Email);
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = message, Data= tokenString });
+                    return this.Ok(new { Status = true, Message = message, Data= tokenString, userData = data });
                 }
                 else
                 {
